@@ -18,7 +18,7 @@ For every test there should be a corresponding PageObject class under com\Seleni
 
 ##Geting Started
 
-Clone repository
-Launch command prompt and type 'mvn clean test' and hit Enter
-Test execution starts
-Run logs are created under ./results/logs/TestLog.txt
+1. Clone repository
+2. Launch command prompt and type 'mvn clean test' and hit Enter
+3. Test execution starts
+4. Run logs are created under ./results/logs/TestLog.txt
