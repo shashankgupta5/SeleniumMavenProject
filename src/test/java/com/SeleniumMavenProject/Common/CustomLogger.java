@@ -10,7 +10,7 @@ public class CustomLogger {
 	private static Logger logger;
 
 	public static void initLogger() {
-		logger = Logger.getLogger("eViewer_HTML5_Tests");
+		logger = Logger.getLogger("Selenium_Tests");
 		PropertyConfigurator.configure(System.getProperty("user.dir")
 				+ File.separator + "log4j.properties");
 	}
