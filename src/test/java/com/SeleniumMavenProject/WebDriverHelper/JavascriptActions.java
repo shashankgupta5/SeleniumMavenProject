@@ -57,7 +57,7 @@ public class JavascriptActions {
 				element);
 	}
 
-	public String execute(String script) {
+	public String executeScript(String script) {
 		Object value = null;
 		try {
 			waitForJavascriptToLoad();
@@ -66,6 +66,10 @@ public class JavascriptActions {
 			CustomLogger.logError("execute: " + e.getMessage());
 		}
 		return value.toString();
+	}
+
+	public Object executeASyncScript(String script) {
+		return js.executeAsyncScript(script);
 	}
 
 	public String getWindowErrors() {
