@@ -72,7 +72,7 @@ public class Shooter {
 
 	private void saveScreenshot(File srcFile, String desPath) {
 		try {
-			FileUtils.copyFile(srcFile, new File(desPath));
+			FileUtils.moveFile(srcFile, new File(desPath));
 			CustomLogger.logInfo(String.format(
 					"saveScreenshot: screenshot saved at {%s}", desPath));
 		} catch (IOException e) {
