@@ -5,10 +5,9 @@
 
 		<groups>
 			<define name="include_group">
-				<include name="google_tests" />
+				<include name="toolsqa_tests" />
 			</define>
 			<define name="exclude_group">
-				<include name="toolsqa_tests" />
 			</define>
 			<run>
 				<include name="include_group" />
@@ -17,7 +16,6 @@
 		</groups>
 
 		<classes>
-			<class name="com.SeleniumMavenProject.Tests.GoogleTests" />
 			<class name="com.SeleniumMavenProject.Tests.ToolsQATests" />
 		</classes>
 	</test>
