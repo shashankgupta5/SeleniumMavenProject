@@ -1,6 +1,5 @@
 package com.SeleniumMavenProject.Pages;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -27,8 +26,6 @@ public class BasePage {
 	protected JavascriptActions jsActions;
 
 	protected int DEFAULT_WAIT = Configuration.getWait();
-	protected String SCREENHOT_DIR = System.getProperty("user.dir")
-			+ File.separator + "logs" + File.separator;
 
 	public BasePage() {
 		wait = new Wait(driver);
