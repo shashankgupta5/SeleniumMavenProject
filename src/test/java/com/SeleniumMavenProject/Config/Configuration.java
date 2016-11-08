@@ -18,12 +18,6 @@ public class Configuration {
 	private static Properties prop;
 	private static InputStream inputStream;
 
-	/**
-	 * this method loads properties files config and file having test data.
-	 * 
-	 * @throws Exception
-	 *             null properties file exception
-	 */
 	public static void initConfigFile() throws Exception {
 		prop = new Properties();
 		inputStream = new FileInputStream(DEFAULT_CONFIG_FILE_NAME);
