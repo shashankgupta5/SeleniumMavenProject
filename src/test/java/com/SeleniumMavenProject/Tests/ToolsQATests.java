@@ -12,8 +12,7 @@ public class ToolsQATests extends TestRunner {
 		try {
 			navigateToUrl("http://toolsqa.com/automation-practice-table/");
 
-			ToolsQAPage toolsPage = new ToolsQAPage();
-			toolsPage.practiceTable();
+			new ToolsQAPage().getPracticeTableData();
 		} catch (Exception e) {
 			CustomLogger
 					.logError("testMethod_01_getTableData: " + e.getMessage());
@@ -26,8 +25,7 @@ public class ToolsQATests extends TestRunner {
 			navigateToUrl(
 					"http://toolsqa.com/automation-practice-switch-windows/");
 
-			ToolsQAPage toolsPage = new ToolsQAPage();
-			toolsPage.performWindowSwitching();
+			new ToolsQAPage().performWindowSwitching();
 		} catch (Exception e) {
 			CustomLogger.logError("testMethod_02_practiceSwitchingWindows: "
 					+ e.getMessage());
