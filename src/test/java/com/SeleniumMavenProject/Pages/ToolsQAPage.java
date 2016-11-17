@@ -24,7 +24,7 @@ public class ToolsQAPage extends BasePage {
 	@FindBy(xpath = "//*[@id='content']/p[4]/button")
 	private WebElement newBrowserTabBtn;
 
-	public ToolsQAPage getPracticeTableData() {
+	public void getPracticeTableData() {
 		assertThat(driver.getTitle(),
 				is("Demo Table for practicing Selenium Automation"));
 
@@ -32,12 +32,11 @@ public class ToolsQAPage extends BasePage {
 		for (WebElement elm : tableData) {
 			String text = elm.getText();
 			if (StringUtils.isNotBlank(text)) {
-				builder.append(text).append("\n");
+				builder.append(text);
 			}
 		}
 		CustomLogger.logInfo(builder.toString());
 		assertThat("table conent shouldn't null", builder, notNullValue());
-		return this;
 	}
 
 	public void performWindowSwitching() {
