@@ -45,7 +45,10 @@ public class NewDriverProvider {
 			// instance
 			case FIREFOX :
 
-				driver = new FirefoxDriver();
+				DesiredCapabilities capabilities = new DesiredCapabilities();
+				capabilities.setCapability(FirefoxDriver.MARIONETTE, true);
+
+				driver = new FirefoxDriver(capabilities);
 				break;
 
 			// If browser equals CHROME set driver property as ChromeWebDriver
