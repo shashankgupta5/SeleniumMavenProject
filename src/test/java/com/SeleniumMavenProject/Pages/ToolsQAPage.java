@@ -1,5 +1,10 @@
 package com.SeleniumMavenProject.Pages;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -13,33 +18,47 @@ public class ToolsQAPage extends BasePage {
 	@FindBy(xpath = "//*[@id='content']/table/thead/tr/following::tr")
 	private List<WebElement> tableData;
 
-	@FindBy(className = "ui-tabs-anchor")
-	private List<WebElement> iFrame_Tabs;
-
 	@FindBy(id = "button1")
 	private WebElement newWindowBtn;
 
 	@FindBy(xpath = "//*[@id='content']/p[4]/button")
 	private WebElement newBrowserTabBtn;
 
-	public void practiceTable() {
+	public ToolsQAPage getPracticeTableData() {
+		assertThat(driver.getTitle(),
+				is("Demo Table for practicing Selenium Automation"));
+
+		StringBuilder builder = new StringBuilder();
 		for (WebElement elm : tableData) {
 			String text = elm.getText();
 			if (StringUtils.isNotBlank(text)) {
-				CustomLogger.logInfo(text);
+				builder.append(text).append("\n");
 			}
 		}
+		CustomLogger.logInfo(builder.toString());
+		assertThat("table conent shouldn't null", builder, notNullValue());
+		return this;
 	}
 
 	public void performWindowSwitching() {
+		assertThat(driver.getTitle(),
+				is("Demo Windows for practicing Selenium Automation"));
 		waitAndClick(newWindowBtn);
 		switchToBrowserTab();
+		assertThat("window count to be '2'", driver.getWindowHandles().size(),
+				equalTo(2));
 		closeCurrentBroserTab();
+		assertThat("window count to be '1'", driver.getWindowHandles().size(),
+				equalTo(1));
 		switchToBrowserTab();
 
 		waitAndClick(newBrowserTabBtn);
 		switchToBrowserTab();
+		assertThat("window count to be '2'", driver.getWindowHandles().size(),
+				equalTo(2));
 		closeCurrentBroserTab();
+		assertThat("window count to be '1'", driver.getWindowHandles().size(),
+				equalTo(1));
 		switchToBrowserTab();
 	}
 }
