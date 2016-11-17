@@ -1,8 +1,8 @@
 package com.SeleniumMavenProject.Pages;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.List;
@@ -36,7 +36,8 @@ public class ToolsQAPage extends BasePage {
 			}
 		}
 		CustomLogger.logInfo(builder.toString());
-		assertThat("table conent shouldn't null", builder, notNullValue());
+		assertThat("table conent shouldn't null", builder.toString(),
+				containsString("Total 4 buildings"));
 	}
 
 	public void performWindowSwitching() {
