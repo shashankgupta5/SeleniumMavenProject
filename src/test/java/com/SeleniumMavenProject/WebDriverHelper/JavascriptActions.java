@@ -3,10 +3,10 @@ package com.SeleniumMavenProject.WebDriverHelper;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.SeleniumMavenProject.Common.CustomLogger;
+import com.google.common.base.Function;
 
 public class JavascriptActions {
 	private JavascriptExecutor js;
@@ -25,7 +25,11 @@ public class JavascriptActions {
 		js.executeScript("$(arguments[0]).focus()", element);
 	}
 
-	public void scrollToBottom(WebDriver driver) {
+	public void scrollToTop() {
+		js.executeScript("window.scrollTo(0, 0)");
+	}
+
+	public void scrollToBottom() {
 		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 	}
 
@@ -80,23 +84,18 @@ public class JavascriptActions {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 
 		// wait for jQuery to load
-		ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
-			public Boolean apply(WebDriver driver) {
-				try {
-					return ((Long) js
-							.executeScript("return jQuery.active") == 0);
-				} catch (Exception e) {
-					return true;
-				}
+		Function<WebDriver, Boolean> jQueryLoad = (WebDriver b) -> {
+			try {
+				return ((Long) js.executeScript("return jQuery.active") == 0);
+			} catch (Exception e) {
+				return true;
 			}
 		};
 
 		// wait for JS to load
-		ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
-			public Boolean apply(WebDriver driver) {
-				return js.executeScript("return document.readyState").toString()
-						.equals("complete");
-			}
+		Function<WebDriver, Boolean> jsLoad = (WebDriver b) -> {
+			return js.executeScript("return document.readyState").toString()
+					.equals("complete");
 		};
 
 		return wait.until(jQueryLoad) && wait.until(jsLoad);
