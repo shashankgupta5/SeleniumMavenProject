@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.SeleniumMavenProject.Common.CustomLogger;
 import com.SeleniumMavenProject.Config.Configuration;
+import com.google.common.base.Function;
 
 public class Wait {
 
@@ -54,25 +55,19 @@ public class Wait {
 	}
 
 	public boolean forElementNotVisible(WebElement element) {
-		return wait.until(new ExpectedCondition<Boolean>() {
-			@Override
-			public Boolean apply(WebDriver driver) {
-				try {
-					return !element.isDisplayed();
-				} catch (NoSuchElementException e) {
-					return true;
-				} catch (StaleElementReferenceException e) {
-					return true;
-				} catch (WebDriverException e) {
-					return true;
-				}
+		Function<WebDriver, Boolean> elementNotVisible = (WebDriver d) -> {
+			try {
+				return !element.isDisplayed();
+			} catch (NoSuchElementException e) {
+				return true;
+			} catch (StaleElementReferenceException e) {
+				return true;
+			} catch (WebDriverException e) {
+				return true;
 			}
+		};
 
-			@Override
-			public String toString() {
-				return "element to no longer be visible " + element.toString();
-			}
-		});
+		return wait.until(elementNotVisible);
 	}
 
 	public Alert forAlertPresent() {
@@ -80,32 +75,20 @@ public class Wait {
 	}
 
 	public boolean forTitleIsNotEmpty() {
-		return wait.until(new ExpectedCondition<Boolean>() {
+		Function<WebDriver, Boolean> titleNotEmpty = (WebDriver d) -> {
+			return StringUtils.isNotBlank(d.getTitle());
+		};
 
-			public Boolean apply(WebDriver driver) {
-				return StringUtils.isNotBlank(driver.getTitle());
-			}
-
-			@Override
-			public String toString() {
-				return "window title is not empty";
-			}
-		});
+		return wait.until(titleNotEmpty);
 	}
 
 	public boolean forNewWindowPresent() {
-		return wait.until(new ExpectedCondition<Boolean>() {
-			@Override
-			public Boolean apply(WebDriver driver) {
-				Object[] windows = driver.getWindowHandles().toArray();
-				return windows.length > 1;
-			}
+		Function<WebDriver, Boolean> newWindowPresent = (WebDriver d) -> {
+			Object[] windows = d.getWindowHandles().toArray();
+			return windows.length > 1;
+		};
 
-			@Override
-			public String toString() {
-				return "new window to appear";
-			}
-		});
+		return wait.until(newWindowPresent);
 	}
 
 	public boolean forCssValuePresentForElement(final WebElement element,
