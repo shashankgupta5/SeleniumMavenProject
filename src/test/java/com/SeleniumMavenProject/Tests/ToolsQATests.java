@@ -14,7 +14,7 @@ import ru.yandex.qatools.allure.annotations.Title;
 public class ToolsQATests extends TestRunner {
 
 	@Title("testMethod_01_getTableData")
-	@Description("Test method to capture table and get its data")
+	@Description("Test method to get table data")
 	public void testMethod_01_getTableData() throws Exception {
 		try {
 			navigateToUrl("http://toolsqa.com/automation-practice-table/");
