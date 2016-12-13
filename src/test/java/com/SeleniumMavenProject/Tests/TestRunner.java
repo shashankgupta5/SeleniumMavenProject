@@ -37,14 +37,16 @@ import com.SeleniumMavenProject.Config.Configuration;
 import com.SeleniumMavenProject.Config.NewDriverProvider;
 import com.SeleniumMavenProject.WebDriverHelper.VideoRecorder;
 
+import ru.yandex.qatools.allure.annotations.Step;
+
 @Listeners(ScreenshotListener.class)
 public class TestRunner {
 
 	private static WebDriver driver;
 	private VideoRecorder videoRecorder;
 
-	private final String RESULTS_DIR = "." + File.separator + "results"
-			+ File.separator;
+	private final String RESULTS_DIR = System.getProperty("user.dir")
+			+ File.separator + "results" + File.separator;
 	private final String VIDEOS_DIR = RESULTS_DIR + "videos" + File.separator;
 
 	@BeforeSuite(alwaysRun = true)
@@ -82,10 +84,12 @@ public class TestRunner {
 		CustomLogger.endLogger();
 	}
 
+	@Step("Start Browser")
 	private void startBrowser() {
 		driver = NewDriverProvider.createWebDriverInstance();
 	}
 
+	@Step("Set Browser Size")
 	private void setBrowserSize() {
 		Dimension browserSize = Configuration.getBrowserSize();
 
@@ -96,10 +100,12 @@ public class TestRunner {
 		}
 	}
 
+	@Step("Navigate to \"{0}\"")
 	protected void navigateToUrl(String url) {
 		driver.get(url);
 	}
 
+	@Step("Close Browser")
 	private void stopBrowser() {
 		if (driver != null) {
 			driver.quit();
