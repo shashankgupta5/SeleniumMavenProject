@@ -17,7 +17,7 @@ public class ScreenshotListener extends TestListenerAdapter {
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		String filePath = String.format("%s%s_%s", SCREENSHOT_DIR,
+		String filePath = String.format("%s%s_%s.png", SCREENSHOT_DIR,
 				result.getMethod().getMethodName(), getTimeStamp());
 
 		Shooter failureScreenshot = new Shooter(
