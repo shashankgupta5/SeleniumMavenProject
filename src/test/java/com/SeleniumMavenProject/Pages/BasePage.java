@@ -1,5 +1,7 @@
 package com.SeleniumMavenProject.Pages;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,6 +20,9 @@ import com.SeleniumMavenProject.WebDriverHelper.JavascriptActions;
 import com.SeleniumMavenProject.WebDriverHelper.Shooter;
 import com.SeleniumMavenProject.WebDriverHelper.Wait;
 
+import ru.yandex.qatools.allure.annotations.Attachment;
+import ru.yandex.qatools.allure.annotations.Step;
+
 public class BasePage {
 	protected final WebDriver driver = NewDriverProvider.getWebDriver();
 	protected Wait wait;
@@ -26,6 +31,9 @@ public class BasePage {
 	protected JavascriptActions jsActions;
 
 	protected int DEFAULT_WAIT = Configuration.getWait();
+	protected final String SCREENSHOTS_DIR = System.getProperty("user.dir")
+			+ File.separator + "results" + File.separator + "screenshots"
+			+ File.separator;
 
 	public BasePage() {
 		wait = new Wait(driver);
@@ -35,14 +43,17 @@ public class BasePage {
 		PageFactory.initElements(driver, this);
 	}
 
+	@Step("Refresh Web Page")
 	public void refreshWebPage() {
 		driver.navigate().refresh();
 	}
 
+	@Step("Close Current Tab")
 	public void closeCurrentBroserTab() {
 		driver.close();
 	}
 
+	@Step("Switch To Browser Tab")
 	protected void switchToBrowserTab() {
 		try {
 			List<String> tabs = new ArrayList<String>(
@@ -57,16 +68,30 @@ public class BasePage {
 		}
 	}
 
+	@Attachment(value = "{0}", type = "image/png")
+	public byte[] saveScreenshot(String attachName) throws IOException {
+		return shooter.captureWebPageAsByteArray();
+	}
+
+	@Attachment(value = "{0}", type = "image/png")
+	public byte[] saveElementScreenshot(WebElement element, String attachName)
+			throws IOException {
+		return shooter.captureWebElementAsByteArray(element);
+	}
+
+	@Step("Wait And Click")
 	protected void waitAndClick(WebElement element) {
 		wait.forElementClickable(element).click();
 	}
 
+	@Step("Wait And Send Keys")
 	protected void waitAndSendKeys(WebElement element, String keys) {
 		wait.forElementVisible(element);
 		element.clear();
 		element.sendKeys(keys);
 	}
 
+	@Step("Is String In Title")
 	protected boolean isStringInTitle(String givenTitle) {
 		String currentTitle = driver.getTitle();
 		if (!currentTitle.contains(givenTitle)) {
@@ -78,6 +103,7 @@ public class BasePage {
 		return true;
 	}
 
+	@Step("Is String In URL")
 	protected boolean isStringInURL(String givenString) {
 		String currentURL = driver.getCurrentUrl();
 		if (!currentURL.contains(givenString)) {
@@ -89,6 +115,7 @@ public class BasePage {
 		return true;
 	}
 
+	@Attachment(value = "{0}", type = "text/plain")
 	public String getRandomNumber(int length) {
 		Random rnd = new Random();
 		StringBuilder sb = new StringBuilder(length);
@@ -98,6 +125,7 @@ public class BasePage {
 		return sb.toString();
 	}
 
+	@Attachment(value = "{0}", type = "text/plain")
 	public String getRandomString(int length) {
 		char[] alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
 				'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
@@ -122,6 +150,7 @@ public class BasePage {
 		}
 	}
 
+	@Step("Accept Alert")
 	public void acceptAlert() {
 		while (isAlertPresent()) {
 			Alert alert = driver.switchTo().alert();
@@ -134,6 +163,7 @@ public class BasePage {
 		}
 	}
 
+	@Step("Is Alert Present")
 	private boolean isAlertPresent() {
 		try {
 			driver.switchTo().alert();
