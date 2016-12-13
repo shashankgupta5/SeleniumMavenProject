@@ -35,6 +35,17 @@ public class Shooter {
 		saveScreenshot(image, desPath);
 	}
 
+	public byte[] captureWebPageAsByteArray() throws IOException {
+		return FileUtils.readFileToByteArray(capturePage());
+	}
+
+	public byte[] captureWebElementAsByteArray(WebElement element)
+			throws IOException {
+		File image = cropImage(element.getLocation(), element.getSize(),
+				fileToImage(capturePage()));
+		return FileUtils.readFileToByteArray(image);
+	}
+
 	private File cropImage(Point start, Dimension size, BufferedImage image) {
 		int width = size.getWidth();
 		int height = size.getHeight();
