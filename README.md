@@ -20,7 +20,8 @@ For every test there should be a corresponding PageObject class under com\Seleni
 
 1. Clone repository
 2. Copy driver exe from ./src/resources/Driver/ to C:/Windows
-3. Launch command prompt and type 'mvn clean test' and hit Enter
+3. Launch command prompt and type 'mvn clean test site' and hit Enter
 4. Test execution starts
 5. Run logs created under ./results/logs/TestLog.txt
 6. Test execution video created under ./results/videos
+7. Allure reports created at default path ./target/site/allure-maven-plugin/index.html
