@@ -79,42 +79,6 @@ public class BasePage {
 		return shooter.captureWebElementAsByteArray(element);
 	}
 
-	@Step("Wait And Click")
-	protected void waitAndClick(WebElement element) {
-		wait.forElementClickable(element).click();
-	}
-
-	@Step("Wait And Send Keys")
-	protected void waitAndSendKeys(WebElement element, String keys) {
-		wait.forElementVisible(element);
-		element.clear();
-		element.sendKeys(keys);
-	}
-
-	@Step("Is String In Title")
-	protected boolean isStringInTitle(String givenTitle) {
-		String currentTitle = driver.getTitle();
-		if (!currentTitle.contains(givenTitle)) {
-			CustomLogger.logInfo(String.format(
-					"isStringInURL: {%s} current url doesn't contains {%s}",
-					currentTitle, givenTitle));
-			return false;
-		}
-		return true;
-	}
-
-	@Step("Is String In URL")
-	protected boolean isStringInURL(String givenString) {
-		String currentURL = driver.getCurrentUrl();
-		if (!currentURL.contains(givenString)) {
-			CustomLogger.logInfo(String.format(
-					"isStringInURL: {%s} current url doesn't contains {%s}",
-					currentURL, givenString));
-			return false;
-		}
-		return true;
-	}
-
 	@Attachment(value = "{0}", type = "text/plain")
 	public String getRandomNumber(int length) {
 		Random rnd = new Random();
@@ -163,7 +127,46 @@ public class BasePage {
 		}
 	}
 
-	@Step("Is Alert Present")
+	@Step("Wait And Click")
+	protected void waitAndClick(WebElement element) {
+		wait.forElementClickable(element).click();
+	}
+
+	@Step("Wait And Send Keys")
+	protected void waitAndSendKeys(WebElement element, String keys) {
+		wait.forElementVisible(element);
+		element.clear();
+		element.sendKeys(keys);
+	}
+
+	@Step("Is String In Title")
+	protected boolean isStringInTitle(String givenTitle) {
+		String currentTitle = driver.getTitle();
+		if (!currentTitle.contains(givenTitle)) {
+			CustomLogger.logInfo(String.format(
+					"isStringInURL: {%s} current url doesn't contains {%s}",
+					currentTitle, givenTitle));
+			return false;
+		}
+		return true;
+	}
+
+	@Step("Is String In URL")
+	protected boolean isStringInURL(String givenString) {
+		String currentURL = driver.getCurrentUrl();
+		if (!currentURL.contains(givenString)) {
+			CustomLogger.logInfo(String.format(
+					"isStringInURL: {%s} current url doesn't contains {%s}",
+					currentURL, givenString));
+			return false;
+		}
+		return true;
+	}
+
+	protected int getWindowCount() {
+		return driver.getWindowHandles().size();
+	}
+
 	private boolean isAlertPresent() {
 		try {
 			driver.switchTo().alert();

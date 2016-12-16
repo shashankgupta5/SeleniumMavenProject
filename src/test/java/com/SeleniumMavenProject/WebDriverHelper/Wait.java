@@ -82,6 +82,10 @@ public class Wait {
 		return wait.until(titleNotEmpty);
 	}
 
+	public boolean forWindowCountToBe(int windowCount) {
+		return wait.until(ExpectedConditions.numberOfWindowsToBe(windowCount));
+	}
+
 	public boolean forNewWindowPresent() {
 		Function<WebDriver, Boolean> newWindowPresent = (WebDriver d) -> {
 			Object[] windows = d.getWindowHandles().toArray();

@@ -1,7 +1,6 @@
 package com.SeleniumMavenProject.Pages;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -69,20 +68,16 @@ public class ToolsQAPage extends BasePage {
 				is("Demo Windows for practicing Selenium Automation"));
 		waitAndClick(newWindowBtn);
 		switchToBrowserTab();
-		assertThat("window count to be '2'", driver.getWindowHandles().size(),
-				equalTo(2));
+		assertThat("window count to be '2'", getWindowCount(), is(2));
 		closeCurrentBroserTab();
-		assertThat("window count to be '1'", driver.getWindowHandles().size(),
-				equalTo(1));
+		assertThat("window count to be '1'", getWindowCount(), is(1));
 		switchToBrowserTab();
 
 		waitAndClick(newBrowserTabBtn);
 		switchToBrowserTab();
-		assertThat("window count to be '2'", driver.getWindowHandles().size(),
-				equalTo(2));
+		assertThat("window count to be '2'", getWindowCount(), is(2));
 		closeCurrentBroserTab();
-		assertThat("window count to be '1'", driver.getWindowHandles().size(),
-				equalTo(1));
+		assertThat("window count to be '1'", getWindowCount(), is(1));
 		switchToBrowserTab();
 	}
 }
