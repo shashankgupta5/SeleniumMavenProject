@@ -61,18 +61,13 @@ public class JavascriptActions {
 				element);
 	}
 
-	public String executeScript(String script) {
-		Object value = null;
-		try {
-			waitForJavascriptToLoad();
-			value = js.executeScript("return " + script);
-		} catch (Exception e) {
-			CustomLogger.logError("execute: " + e.getMessage());
-		}
-		return value.toString();
+	public Object executeScript(String script) {
+		waitForJavascriptToLoad();
+		return js.executeScript("return " + script);
 	}
 
 	public Object executeASyncScript(String script) {
+		waitForJavascriptToLoad();
 		return js.executeAsyncScript(script);
 	}
 
