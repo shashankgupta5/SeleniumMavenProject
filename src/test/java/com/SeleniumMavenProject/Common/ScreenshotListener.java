@@ -1,8 +1,8 @@
 package com.SeleniumMavenProject.Common;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
@@ -26,9 +26,7 @@ public class ScreenshotListener extends TestListenerAdapter {
 	}
 
 	private String getTimeStamp() {
-		Date currDate = new Date();
-		String currentTime = new SimpleDateFormat("dd.MM.yyyy h.mm.ss")
-				.format(currDate);
-		return currentTime.replace(" ", "_");
+		LocalDateTime time = LocalDateTime.now();
+		return time.format(DateTimeFormatter.ofPattern("dd.MMM.uuu_HH.mm.ss"));
 	}
 }
