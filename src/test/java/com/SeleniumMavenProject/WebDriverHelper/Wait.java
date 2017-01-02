@@ -45,6 +45,25 @@ public class Wait {
 		return null;
 	}
 
+	public boolean forElementNotClickable(WebElement element) {
+		ExpectedCondition<WebElement> elementVisible = ExpectedConditions
+				.visibilityOf(element);
+		Function<WebDriver, Boolean> notClickable = (WebDriver d) -> {
+			try {
+				WebElement e = elementVisible.apply(d);
+				return !e.isEnabled();
+			} catch (NoSuchElementException e) {
+				return true;
+			} catch (StaleElementReferenceException e) {
+				return true;
+			} catch (WebDriverException e) {
+				return true;
+			}
+		};
+
+		return wait.until(notClickable);
+	}
+
 	public WebElement forElementVisible(WebElement element) {
 		try {
 			return wait.until(ExpectedConditions.visibilityOf(element));
@@ -55,7 +74,7 @@ public class Wait {
 	}
 
 	public boolean forElementNotVisible(WebElement element) {
-		Function<WebDriver, Boolean> elementNotVisible = (WebDriver d) -> {
+		Function<WebDriver, Boolean> notVisible = (WebDriver d) -> {
 			try {
 				return !element.isDisplayed();
 			} catch (NoSuchElementException e) {
@@ -67,7 +86,7 @@ public class Wait {
 			}
 		};
 
-		return wait.until(elementNotVisible);
+		return wait.until(notVisible);
 	}
 
 	public Alert forAlertPresent() {
@@ -95,14 +114,13 @@ public class Wait {
 		return wait.until(newWindowPresent);
 	}
 
-	public boolean forCssValuePresentForElement(final WebElement element,
-			final String cssProperty, final String expectedValue) {
-		return wait.until(new ExpectedCondition<Boolean>() {
+	public boolean forCssValuePresentForElement(WebElement element,
+			String cssProperty, String expectedValue) {
+		Function<WebDriver, Boolean> cssValuePresent = (WebDriver d) -> {
+			return expectedValue.equals(element.getCssValue(cssProperty));
+		};
 
-			public Boolean apply(WebDriver driver) {
-				return expectedValue.equals(element.getCssValue(cssProperty));
-			}
-		});
+		return wait.until(cssValuePresent);
 	}
 
 	public boolean forAttributeContains(WebElement element, String attribute,
