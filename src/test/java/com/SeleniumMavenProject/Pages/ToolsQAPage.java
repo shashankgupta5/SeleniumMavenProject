@@ -10,7 +10,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import com.SeleniumMavenProject.Common.CustomLogger;
 
@@ -41,7 +40,6 @@ public class ToolsQAPage extends BasePage {
 
 	public ToolsQAPage() {
 		super();
-		PageFactory.initElements(driver, this);
 	}
 
 	@Step("Started getting practice table data")
@@ -58,8 +56,8 @@ public class ToolsQAPage extends BasePage {
 		});
 
 		CustomLogger.logInfo(builder.toString());
-		assertThat("table conent shouldn't null", builder.toString(),
-				containsString("Total 4 buildings"));
+		assertThat("getPracticeTableData: table conent shouldn't be null",
+				builder.toString(), containsString("Total 4 buildings"));
 	}
 
 	@Step("Started performing window switching")
@@ -68,16 +66,20 @@ public class ToolsQAPage extends BasePage {
 				is("Demo Windows for practicing Selenium Automation"));
 		waitAndClick(newWindowBtn);
 		switchToBrowserTab();
-		assertThat("window count to be '2'", getWindowCount(), is(2));
+		assertThat("performWindowSwitching: window count to be '2'",
+				getWindowCount(), is(2));
 		closeCurrentBroserTab();
-		assertThat("window count to be '1'", getWindowCount(), is(1));
+		assertThat("performWindowSwitching: window count to be '1'",
+				getWindowCount(), is(1));
 		switchToBrowserTab();
 
 		waitAndClick(newBrowserTabBtn);
 		switchToBrowserTab();
-		assertThat("window count to be '2'", getWindowCount(), is(2));
+		assertThat("performWindowSwitching: window count to be '2'",
+				getWindowCount(), is(2));
 		closeCurrentBroserTab();
-		assertThat("window count to be '1'", getWindowCount(), is(1));
+		assertThat("performWindowSwitching: window count to be '1'",
+				getWindowCount(), is(1));
 		switchToBrowserTab();
 	}
 }
