@@ -56,8 +56,7 @@ public class BasePage {
 	@Step("Switch To Browser Tab")
 	protected void switchToBrowserTab() {
 		try {
-			List<String> tabs = new ArrayList<String>(
-					driver.getWindowHandles());
+			List<String> tabs = new ArrayList<>(driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(tabs.size() - 1));
 			CustomLogger.logInfo(
 					String.format("switchToBrowserTab: Currently at {%s} tab",
@@ -144,7 +143,7 @@ public class BasePage {
 		String currentTitle = driver.getTitle();
 		if (!currentTitle.contains(givenTitle)) {
 			CustomLogger.logInfo(String.format(
-					"isStringInURL: {%s} current url doesn't contains {%s}",
+					"isStringInTitle: {%s} current title doesn't contains {%s}",
 					currentTitle, givenTitle));
 			return false;
 		}
