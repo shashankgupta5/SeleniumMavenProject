@@ -3,6 +3,7 @@ package com.SeleniumMavenProject.Tests;
 import org.testng.annotations.Test;
 
 import com.SeleniumMavenProject.Common.CustomLogger;
+import com.SeleniumMavenProject.Common.Retry;
 import com.SeleniumMavenProject.Pages.ToolsQAPage;
 
 import ru.yandex.qatools.allure.annotations.Description;
@@ -10,7 +11,7 @@ import ru.yandex.qatools.allure.annotations.Title;
 
 @Title("ToolsQATests")
 @Description("Tests for ToolsQA Website")
-@Test(groups = {"toolsqa_tests"})
+@Test(groups = {"toolsqa_tests"}, retryAnalyzer = Retry.class)
 public class ToolsQATests extends TestRunner {
 
 	@Title("testMethod_01_getTableData")
