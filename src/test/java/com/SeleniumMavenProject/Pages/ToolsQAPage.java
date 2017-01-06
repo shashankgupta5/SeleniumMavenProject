@@ -26,18 +26,6 @@ public class ToolsQAPage extends BasePage {
 	@FindBy(xpath = "//*[@id='content']/p[4]/button")
 	private WebElement newBrowserTabBtn;
 
-	@FindBy(tagName = "button")
-	private List<WebElement> btns;
-
-	@FindBy(id = "navbar-container")
-	private WebElement navBar;
-
-	@FindBy(linkText = "details")
-	private List<WebElement> details;
-
-	@FindBy(xpath = "//*[@class='cancel']")
-	private WebElement cancelBtn;
-
 	public ToolsQAPage() {
 		super();
 	}
@@ -62,8 +50,7 @@ public class ToolsQAPage extends BasePage {
 
 	@Step("Started performing window switching")
 	public void performWindowSwitching() {
-		assertThat(driver.getTitle(),
-				is("Demo Windows for practicing Selenium Automation"));
+		assertThat(driver.getTitle(), is("Demo Windows for practicing Selenium Automation"));
 		waitAndClick(newWindowBtn);
 		switchToBrowserTab();
 		assertThat("performWindowSwitching: window count to be '2'",
