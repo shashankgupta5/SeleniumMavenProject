@@ -1,6 +1,5 @@
 package com.SeleniumMavenProject.Config;
 
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -10,7 +9,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 import com.SeleniumMavenProject.Common.CustomLogger;
@@ -19,7 +17,7 @@ public class NewDriverProvider {
 	private static WebDriver driver;
 
 	private enum Browser {
-		CHROME, FIREFOX, IE, EDGE, REMOTE, SAFARI
+		CHROME, FIREFOX, IE, EDGE, SAFARI
 	}
 
 	public static WebDriver getWebDriver() {
@@ -59,21 +57,6 @@ public class NewDriverProvider {
 				chromeOptions.addArguments("--disable-extensions");
 
 				driver = new ChromeDriver(chromeOptions);
-				break;
-
-			// If browser equals REMOTE set driver property as RemoteWebDriver
-			// instance
-			case REMOTE :
-
-				try {
-					driver = new RemoteWebDriver(
-							new URL(Configuration.getGridURL()),
-							DesiredCapabilities.firefox());
-				} catch (Exception e) {
-					CustomLogger.logError(String.format(
-							"createWebDriverInstance: RemoteWebDriver {%s}",
-							e.getMessage()));
-				}
 				break;
 
 			// If browser equals SAFARI set driver property as Safari
