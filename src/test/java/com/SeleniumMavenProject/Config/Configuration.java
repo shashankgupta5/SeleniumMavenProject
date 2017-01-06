@@ -13,8 +13,8 @@ import org.openqa.selenium.WebDriverException;
 import com.SeleniumMavenProject.Common.CustomLogger;
 
 public class Configuration {
-	private static String DEFAULT_CONFIG_FILE_NAME = "." + File.separator
-			+ "default_config.properties";
+	private static String DEFAULT_CONFIG_FILE_NAME = System.getProperty(
+			"user.dir") + File.separator + "default_config.properties";
 	private static Properties prop;
 	private static InputStream inputStream;
 
@@ -61,12 +61,16 @@ public class Configuration {
 		}
 	}
 
-	public static int getDefaultTimeOut() {
-		return Integer.parseInt(getProp("DEFAULT_TIMEOUT"));
+	public static int getImplicitWaitTimeOut() {
+		return Integer.parseInt(getProp("IMPLICIT_WAIT_TIMEOUT"));
 	}
 
-	public static int getWait() {
-		return Integer.parseInt(getProp("DEFAULT_WAIT"));
+	public static int getExplicitWaitTimeOut() {
+		return Integer.parseInt(getProp("EXPLICIT_WAIT_TIMEOUT"));
+	}
+
+	public static int getSleepTimeOut() {
+		return Integer.parseInt(getProp("SLEEP_TIMEOUT"));
 	}
 
 	public static void endConfigFile() {

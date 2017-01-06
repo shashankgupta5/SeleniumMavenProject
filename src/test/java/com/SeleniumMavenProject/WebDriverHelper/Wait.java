@@ -19,12 +19,10 @@ import com.google.common.base.Function;
 public class Wait {
 
 	private WebDriverWait wait;
-	private final int DEFAULT_TIMEOUT_FOR_EXPLICIT_WAIT = Configuration
-			.getDefaultTimeOut();
 
 	public Wait(WebDriver driver) {
 		this.wait = new WebDriverWait(driver,
-				DEFAULT_TIMEOUT_FOR_EXPLICIT_WAIT);
+				Configuration.getExplicitWaitTimeOut());
 	}
 
 	public WebElement forElementPresent(By by) {

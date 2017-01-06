@@ -13,7 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import com.SeleniumMavenProject.Common.CustomLogger;
-import com.SeleniumMavenProject.Config.Configuration;
 import com.SeleniumMavenProject.Config.NewDriverProvider;
 import com.SeleniumMavenProject.WebDriverHelper.CustomLocator;
 import com.SeleniumMavenProject.WebDriverHelper.JavascriptActions;
@@ -30,7 +29,6 @@ public class BasePage {
 	protected CustomLocator locator;
 	protected JavascriptActions jsActions;
 
-	protected int DEFAULT_WAIT = Configuration.getWait();
 	protected final String SCREENSHOTS_DIR = System.getProperty("user.dir")
 			+ File.separator + "results" + File.separator + "screenshots"
 			+ File.separator;
