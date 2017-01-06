@@ -43,10 +43,6 @@ public class Configuration {
 		return getProp("BROWSER");
 	}
 
-	public static String getGridURL() {
-		return getProp("GRID_URL");
-	}
-
 	public static Dimension getBrowserSize() {
 		String size = getProp("BROWSER_SIZE");
 
