@@ -23,13 +23,13 @@ import ru.yandex.qatools.allure.annotations.Attachment;
 import ru.yandex.qatools.allure.annotations.Step;
 
 public class BasePage {
-	protected final WebDriver driver = NewDriverProvider.getWebDriver();
-	protected Wait wait;
-	protected Shooter shooter;
-	protected CustomLocator locator;
-	protected JavascriptActions jsActions;
+	final WebDriver driver = NewDriverProvider.getWebDriver();
+	Wait wait;
+	Shooter shooter;
+	CustomLocator locator;
+	JavascriptActions jsActions;
 
-	protected final String SCREENSHOTS_DIR = System.getProperty("user.dir")
+	final String SCREENSHOTS_DIR = System.getProperty("user.dir")
 			+ File.separator + "results" + File.separator + "screenshots"
 			+ File.separator;
 
@@ -52,7 +52,7 @@ public class BasePage {
 	}
 
 	@Step("Switch To Browser Tab")
-	protected void switchToBrowserTab() {
+	void switchToBrowserTab() {
 		try {
 			List<String> tabs = new ArrayList<>(driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(tabs.size() - 1));
@@ -66,12 +66,12 @@ public class BasePage {
 	}
 
 	@Attachment(value = "{0}", type = "image/png")
-	public byte[] saveScreenshot(String attachName) throws IOException {
+	byte[] saveScreenshot(String attachName) throws IOException {
 		return shooter.captureWebPageAsByteArray();
 	}
 
 	@Attachment(value = "{0}", type = "image/png")
-	public byte[] saveElementScreenshot(WebElement element, String attachName)
+	byte[] saveElementScreenshot(WebElement element, String attachName)
 			throws IOException {
 		return shooter.captureWebElementAsByteArray(element);
 	}
@@ -112,7 +112,7 @@ public class BasePage {
 	}
 
 	@Step("Accept Alert")
-	public void acceptAlert() {
+	void acceptAlert() {
 		while (isAlertPresent()) {
 			Alert alert = driver.switchTo().alert();
 			String alertText = alert.getText();
@@ -125,19 +125,19 @@ public class BasePage {
 	}
 
 	@Step("Wait And Click")
-	protected void waitAndClick(WebElement element) {
+	void waitAndClick(WebElement element) {
 		wait.forElementClickable(element).click();
 	}
 
 	@Step("Wait And Send Keys")
-	protected void waitAndSendKeys(WebElement element, String keys) {
+	void waitAndSendKeys(WebElement element, String keys) {
 		wait.forElementVisible(element);
 		element.clear();
 		element.sendKeys(keys);
 	}
 
 	@Step("Is String In Title")
-	protected boolean isStringInTitle(String givenTitle) {
+	boolean isStringInTitle(String givenTitle) {
 		String currentTitle = driver.getTitle();
 		if (!currentTitle.contains(givenTitle)) {
 			CustomLogger.logInfo(String.format(
@@ -149,7 +149,7 @@ public class BasePage {
 	}
 
 	@Step("Is String In URL")
-	protected boolean isStringInURL(String givenString) {
+	boolean isStringInURL(String givenString) {
 		String currentURL = driver.getCurrentUrl();
 		if (!currentURL.contains(givenString)) {
 			CustomLogger.logInfo(String.format(
@@ -160,7 +160,7 @@ public class BasePage {
 		return true;
 	}
 
-	protected int getWindowCount() {
+	int getWindowCount() {
 		return driver.getWindowHandles().size();
 	}
 

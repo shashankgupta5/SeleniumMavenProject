@@ -101,7 +101,7 @@ public class TestRunner {
 	}
 
 	@Step("Navigate to \"{0}\"")
-	protected void navigateToUrl(String url) {
+	void navigateToUrl(String url) {
 		driver.get(url);
 	}
 

@@ -39,10 +39,6 @@ public class Configuration {
 		}
 	}
 
-	public static String getBrowser() {
-		return getProp("BROWSER");
-	}
-
 	public static Dimension getBrowserSize() {
 		String size = getProp("BROWSER_SIZE");
 
@@ -61,16 +57,20 @@ public class Configuration {
 		}
 	}
 
-	public static int getImplicitWaitTimeOut() {
-		return Integer.parseInt(getProp("IMPLICIT_WAIT_TIMEOUT"));
-	}
-
 	public static int getExplicitWaitTimeOut() {
 		return Integer.parseInt(getProp("EXPLICIT_WAIT_TIMEOUT"));
 	}
 
 	public static int getSleepTimeOut() {
 		return Integer.parseInt(getProp("SLEEP_TIMEOUT"));
+	}
+
+	static String getBrowser() {
+		return getProp("BROWSER");
+	}
+
+	static int getImplicitWaitTimeOut() {
+		return Integer.parseInt(getProp("IMPLICIT_WAIT_TIMEOUT"));
 	}
 
 	public static void endConfigFile() {
