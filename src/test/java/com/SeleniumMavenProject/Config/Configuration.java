@@ -13,8 +13,8 @@ import org.openqa.selenium.WebDriverException;
 import com.SeleniumMavenProject.Common.CustomLogger;
 
 public class Configuration {
-	private static String DEFAULT_CONFIG_FILE_NAME = System.getProperty(
-			"user.dir") + File.separator + "default_config.properties";
+	private static String DEFAULT_CONFIG_FILE_NAME = System.getProperty("user.dir") + File.separator
+			+ "default_config.properties";
 	private static Properties prop;
 	private static InputStream inputStream;
 
@@ -25,8 +25,7 @@ public class Configuration {
 		try {
 			prop.load(inputStream);
 		} catch (FileNotFoundException e) {
-			throw new Exception(String.format(
-					"startConfiguration: CANNOT FIND DEFAULT CONFIG FILE : {%s}",
+			throw new Exception(String.format("startConfiguration: CANNOT FIND DEFAULT CONFIG FILE : {%s}",
 					DEFAULT_CONFIG_FILE_NAME));
 		}
 	}
@@ -46,14 +45,11 @@ public class Configuration {
 			if (size.equals("MAXIMIZE")) {
 				return null;
 			} else {
-				return new Dimension(Integer.parseInt(size.split("x")[0]),
-						Integer.parseInt(size.split("x")[1]));
+				return new Dimension(Integer.parseInt(size.split("x")[0]), Integer.parseInt(size.split("x")[1]));
 			}
 		} else {
-			CustomLogger.logError(String.format(
-					"getBrowserSize: {%s} is not a proper value", size));
-			throw new WebDriverException(String.format(
-					"getBrowserSize: {%s} is not a proper value", size));
+			CustomLogger.logError(String.format("getBrowserSize: {%s} is not a proper value", size));
+			throw new WebDriverException(String.format("getBrowserSize: {%s} is not a proper value", size));
 		}
 	}
 
@@ -65,8 +61,8 @@ public class Configuration {
 		return Integer.parseInt(getProp("SLEEP_TIMEOUT"));
 	}
 
-	static String getBrowser() {
-		return getProp("BROWSER");
+	static String getGridURL() {
+		return getProp("GRID_URL");
 	}
 
 	static int getImplicitWaitTimeOut() {
