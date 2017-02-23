@@ -21,8 +21,7 @@ public class Wait {
 	private WebDriverWait wait;
 
 	public Wait(WebDriver driver) {
-		this.wait = new WebDriverWait(driver,
-				Configuration.getExplicitWaitTimeOut());
+		this.wait = new WebDriverWait(driver, Configuration.getExplicitWaitTimeOut());
 	}
 
 	public WebElement forElementPresent(By by) {
@@ -44,8 +43,7 @@ public class Wait {
 	}
 
 	public boolean forElementNotClickable(WebElement element) {
-		ExpectedCondition<WebElement> elementVisible = ExpectedConditions
-				.visibilityOf(element);
+		ExpectedCondition<WebElement> elementVisible = ExpectedConditions.visibilityOf(element);
 		Function<WebDriver, Boolean> notClickable = (WebDriver d) -> {
 			try {
 				WebElement e = elementVisible.apply(d);
@@ -112,8 +110,7 @@ public class Wait {
 		return wait.until(newWindowPresent);
 	}
 
-	public boolean forCssValuePresentForElement(WebElement element,
-			String cssProperty, String expectedValue) {
+	public boolean forCssValuePresentForElement(WebElement element, String cssProperty, String expectedValue) {
 		Function<WebDriver, Boolean> cssValuePresent = (WebDriver d) -> {
 			return expectedValue.equals(element.getCssValue(cssProperty));
 		};
@@ -121,10 +118,8 @@ public class Wait {
 		return wait.until(cssValuePresent);
 	}
 
-	public boolean forAttributeContains(WebElement element, String attribute,
-			String value) {
-		return wait.until(ExpectedConditions.attributeContains(element,
-				attribute, value));
+	public boolean forAttributeContains(WebElement element, String attribute, String value) {
+		return wait.until(ExpectedConditions.attributeContains(element, attribute, value));
 	}
 
 	public boolean forUrlContains(String text) {
@@ -135,8 +130,7 @@ public class Wait {
 		try {
 			Thread.sleep(seconds * 1000);
 		} catch (InterruptedException e) {
-			CustomLogger.logError(
-					String.format("forXSeconds: {%s}", e.getMessage()));
+			CustomLogger.logError(String.format("forXSeconds: {%s}", e.getMessage()));
 		}
 	}
 }
