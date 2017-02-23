@@ -1,19 +1,33 @@
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-<suite name="Selenium_Test_Suite" configfailurepolicy="continue">
+<suite name="Selenium_Test_Suite" configfailurepolicy="continue"
+	parallel="tests">
 
-	<test name="Smoke_Tests" preserve-order="true" group-by-instances="true">
+	<!--Tests executed on IE browser -->
+	<!-- For platform other then windows add 'MAC', 'LINUX', etc. -->
+	<test name="First_Tests" preserve-order="true" group-by-instances="true">
+		<parameter name="browser" value="internet explorer" />
+		<parameter name="platform" value="WINDOWS" />
 
-		<groups>
-			<define name="include_group">
-				<include name="toolsqa_tests" />
-			</define>
-			<define name="exclude_group">
-			</define>
-			<run>
-				<include name="include_group" />
-				<exclude name="exclude_group" />
-			</run>
-		</groups>
+		<classes>
+			<class name="com.SeleniumMavenProject.Tests.ToolsQATests" />
+		</classes>
+	</test>
+
+	<!--Tests executed on Chrome browser -->
+	<test name="Second_Tests" preserve-order="true"
+	group-by-instances="true">
+		<parameter name="browser" value="chrome" />
+		<parameter name="platform" value="WINDOWS" />
+
+		<classes>
+			<class name="com.SeleniumMavenProject.Tests.ToolsQATests" />
+		</classes>
+	</test>
+
+	<!-- Tests executed on Firefox browser -->
+	<test name="Third_Tests" preserve-order="true" group-by-instances="true">
+		<parameter name="browser" value="firefox" />
+		<parameter name="platform" value="WINDOWS" />
 
 		<classes>
 			<class name="com.SeleniumMavenProject.Tests.ToolsQATests" />
