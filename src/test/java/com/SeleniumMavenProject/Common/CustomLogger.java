@@ -1,18 +1,17 @@
 package com.SeleniumMavenProject.Common;
 
-import java.io.File;
 import java.lang.reflect.Method;
 
+import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.PatternLayout;
 
 public class CustomLogger {
 	private static Logger logger;
 
 	public static void initLogger() {
 		logger = Logger.getLogger("Selenium_Tests");
-		PropertyConfigurator.configure(System.getProperty("user.dir")
-				+ File.separator + "log4j.properties");
+		logger.addAppender(new ConsoleAppender(new PatternLayout("%d{dd-MM-yyyy HH:mm:ss} %-5p %c{1}:%L - %m%n")));
 	}
 
 	public static void logInfo(String message) {
@@ -28,23 +27,15 @@ public class CustomLogger {
 	}
 
 	public static void startTestCase(Method testMethod) {
-		logger.info(
-				"--------------------------------------------------------------------------------------");
-		logger.info(
-				"			" + testMethod.getDeclaringClass().getSimpleName()
-						+ "_" + testMethod.getName());
-		logger.info(
-				"--------------------------------------------------------------------------------------");
+		logger.info("--------------------------------------------------------------------------------------");
+		logger.info("			" + testMethod.getDeclaringClass().getSimpleName() + "_" + testMethod.getName());
+		logger.info("--------------------------------------------------------------------------------------");
 	}
 
 	public static void endTestCase(Method testMethod) {
-		logger.info(
-				"--------------------------------------------------------------------------------------");
-		logger.info("			End Of "
-				+ testMethod.getDeclaringClass().getSimpleName() + "_"
-				+ testMethod.getName());
-		logger.info(
-				"--------------------------------------------------------------------------------------");
+		logger.info("--------------------------------------------------------------------------------------");
+		logger.info("			End Of " + testMethod.getDeclaringClass().getSimpleName() + "_" + testMethod.getName());
+		logger.info("--------------------------------------------------------------------------------------");
 	}
 
 	public static void endLogger() {
