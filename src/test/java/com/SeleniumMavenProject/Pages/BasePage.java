@@ -13,7 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import com.SeleniumMavenProject.Common.CustomLogger;
-import com.SeleniumMavenProject.Config.NewDriverProvider;
 import com.SeleniumMavenProject.WebDriverHelper.CustomLocator;
 import com.SeleniumMavenProject.WebDriverHelper.JavascriptActions;
 import com.SeleniumMavenProject.WebDriverHelper.Shooter;
@@ -23,20 +22,21 @@ import ru.yandex.qatools.allure.annotations.Attachment;
 import ru.yandex.qatools.allure.annotations.Step;
 
 public class BasePage {
-	final WebDriver driver = NewDriverProvider.getWebDriver();
-	Wait wait;
-	Shooter shooter;
-	CustomLocator locator;
-	JavascriptActions jsActions;
 
-	final String SCREENSHOTS_DIR = System.getProperty("user.dir")
-			+ File.separator + "results" + File.separator + "screenshots"
-			+ File.separator;
+	WebDriver driver = null;
+	Wait wait = null;
+	Shooter shooter = null;
+	CustomLocator locator = null;
+	JavascriptActions jsActions = null;
 
-	public BasePage() {
-		wait = new Wait(driver);
-		shooter = new Shooter(driver);
-		jsActions = new JavascriptActions(driver);
+	final String SCREENSHOTS_DIR = System.getProperty("user.dir") + File.separator + "results" + File.separator
+			+ "screenshots" + File.separator;
+
+	public BasePage(WebDriver driver) {
+		this.driver = driver;
+		this.wait = new Wait(driver);
+		this.shooter = new Shooter(driver);
+		this.jsActions = new JavascriptActions(driver);
 
 		PageFactory.initElements(driver, this);
 	}
@@ -56,12 +56,9 @@ public class BasePage {
 		try {
 			List<String> tabs = new ArrayList<>(driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(tabs.size() - 1));
-			CustomLogger.logInfo(
-					String.format("switchToBrowserTab: Currently at {%s} tab",
-							driver.getTitle()));
+			CustomLogger.logInfo(String.format("switchToBrowserTab: Currently at {%s} tab", driver.getTitle()));
 		} catch (Exception e) {
-			CustomLogger.logError(
-					String.format("switchToBrowserTab: {%s}", e.getMessage()));
+			CustomLogger.logError(String.format("switchToBrowserTab: {%s}", e.getMessage()));
 		}
 	}
 
@@ -71,8 +68,7 @@ public class BasePage {
 	}
 
 	@Attachment(value = "{0}", type = "image/png")
-	byte[] saveElementScreenshot(WebElement element, String attachName)
-			throws IOException {
+	byte[] saveElementScreenshot(WebElement element, String attachName) throws IOException {
 		return shooter.captureWebElementAsByteArray(element);
 	}
 
@@ -88,11 +84,9 @@ public class BasePage {
 
 	@Attachment(value = "{0}", type = "text/plain")
 	public String getRandomString(int length) {
-		char[] alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-				'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
-				'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-				'l', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'w',
-				'x', 'y', 'z'};
+		char[] alphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+				'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'l', 'k', 'l',
+				'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 		Random rnd = new Random();
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < length; i++) {
@@ -105,8 +99,7 @@ public class BasePage {
 		try {
 			return driver.toString().contains("null");
 		} catch (Exception e) {
-			CustomLogger
-					.logError(String.format("hasQuit: {%s}", e.getMessage()));
+			CustomLogger.logError(String.format("hasQuit: {%s}", e.getMessage()));
 			return true;
 		}
 	}
@@ -118,9 +111,8 @@ public class BasePage {
 			String alertText = alert.getText();
 			alert.accept();
 
-			CustomLogger.logError(String.format(
-					"waitForAlertAndAccept: Detected and Closed alert with text {%s}",
-					alertText));
+			CustomLogger.logError(
+					String.format("waitForAlertAndAccept: Detected and Closed alert with text {%s}", alertText));
 		}
 	}
 
@@ -140,8 +132,7 @@ public class BasePage {
 	boolean isStringInTitle(String givenTitle) {
 		String currentTitle = driver.getTitle();
 		if (!currentTitle.contains(givenTitle)) {
-			CustomLogger.logInfo(String.format(
-					"isStringInTitle: {%s} current title doesn't contains {%s}",
+			CustomLogger.logInfo(String.format("isStringInTitle: {%s} current title doesn't contains {%s}",
 					currentTitle, givenTitle));
 			return false;
 		}
@@ -152,9 +143,8 @@ public class BasePage {
 	boolean isStringInURL(String givenString) {
 		String currentURL = driver.getCurrentUrl();
 		if (!currentURL.contains(givenString)) {
-			CustomLogger.logInfo(String.format(
-					"isStringInURL: {%s} current url doesn't contains {%s}",
-					currentURL, givenString));
+			CustomLogger.logInfo(
+					String.format("isStringInURL: {%s} current url doesn't contains {%s}", currentURL, givenString));
 			return false;
 		}
 		return true;
