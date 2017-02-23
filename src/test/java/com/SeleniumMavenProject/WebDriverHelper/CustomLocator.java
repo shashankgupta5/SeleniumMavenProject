@@ -11,8 +11,7 @@ public class CustomLocator {
 	private WebElement foundElement = null;
 
 	public WebElement getElement(List<WebElement> elements) {
-		CustomLogger.logInfo(String.format(
-				"getElement: List contains {%s} elements", elements.size()));
+		CustomLogger.logInfo(String.format("getElement: List contains {%s} elements", elements.size()));
 
 		elements.forEach((e) -> {
 			if (e != null && e.isDisplayed()) {
@@ -21,17 +20,13 @@ public class CustomLocator {
 		});
 
 		if (foundElement == null) {
-			throw new NoSuchElementException(
-					"getElement: Element not found in the list");
+			throw new NoSuchElementException("getElement: Element not found in the list");
 		}
 		return foundElement;
 	}
 
-	public WebElement getElementByValue(List<WebElement> elements,
-			String attribute, String value) {
-		CustomLogger.logInfo(
-				String.format("getElementByValue: List contains {%s} elements",
-						elements.size()));
+	public WebElement getElementByValue(List<WebElement> elements, String attribute, String value) {
+		CustomLogger.logInfo(String.format("getElementByValue: List contains {%s} elements", elements.size()));
 
 		elements.forEach((e) -> {
 			if (e.getAttribute(attribute).equals(value)) {
@@ -48,9 +43,7 @@ public class CustomLocator {
 	}
 
 	public WebElement getElementByText(List<WebElement> elements, String text) {
-		CustomLogger.logInfo(
-				String.format("getElementByText: List contains {%s} elements",
-						elements.size()));
+		CustomLogger.logInfo(String.format("getElementByText: List contains {%s} elements", elements.size()));
 
 		elements.forEach((e) -> {
 			if (e.getText().equalsIgnoreCase(text)) {
@@ -59,9 +52,8 @@ public class CustomLocator {
 		});
 
 		if (foundElement == null) {
-			throw new NoSuchElementException(String.format(
-					"getElementByText: Element with text {%s} is not found in the list",
-					text));
+			throw new NoSuchElementException(
+					String.format("getElementByText: Element with text {%s} is not found in the list", text));
 		}
 		return foundElement;
 	}
