@@ -23,5 +23,16 @@ For every test there should be a corresponding PageObject class under com\Seleni
 3. Launch command prompt and type 'mvn clean test site' and hit Enter
 4. Test execution starts
 5. Run logs created under ./results/logs/TestLog.txt
-6. Test execution video created under ./results/videos
-7. Allure reports created at default path ./target/site/allure-maven-plugin/index.html
+6. Allure reports created at default path ./target/site/allure-maven-plugin/index.html
+
+## What's New
+
+Added support for running test in distributed environment using selenium grid. For more information visit http://www.seleniumhq.org/docs/07_selenium_grid.jsp. Removed logic for creating test execution videos as it would not be useful in distributed environment.
+
+Steps before executing tests-
+
+1. Go to src/resources/Grid
+2. Modify the node.json file as per requirement
+3. Launch run_grid.bat for running server
+4. From now on testSuite.xml will be controlling test execution for browsers
+5. Finally, run test via testSuite.xml or mvn command
