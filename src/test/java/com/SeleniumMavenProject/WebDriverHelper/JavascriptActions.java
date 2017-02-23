@@ -39,10 +39,7 @@ public class JavascriptActions {
 
 	public void scrollToElement(WebElement element) {
 		try {
-			js.executeScript(
-					"var x = $(arguments[0]); "
-							+ "window.scroll(0,parseInt(x.offset().top - 100));",
-					element);
+			js.executeScript("var x = $(arguments[0]); " + "window.scroll(0,parseInt(x.offset().top - 100));", element);
 		} catch (Exception e) {
 			CustomLogger.logInfo("scrollToElement: " + e.getMessage());
 		}
@@ -89,8 +86,7 @@ public class JavascriptActions {
 
 		// wait for JS to load
 		Function<WebDriver, Boolean> jsLoad = (WebDriver b) -> {
-			return js.executeScript("return document.readyState").toString()
-					.equals("complete");
+			return js.executeScript("return document.readyState").toString().equals("complete");
 		};
 
 		return wait.until(jQueryLoad) && wait.until(jsLoad);
