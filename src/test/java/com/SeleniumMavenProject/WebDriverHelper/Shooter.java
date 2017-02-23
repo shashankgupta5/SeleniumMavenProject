@@ -39,10 +39,8 @@ public class Shooter {
 		return FileUtils.readFileToByteArray(capturePage());
 	}
 
-	public byte[] captureWebElementAsByteArray(WebElement element)
-			throws IOException {
-		File image = cropImage(element.getLocation(), element.getSize(),
-				fileToImage(capturePage()));
+	public byte[] captureWebElementAsByteArray(WebElement element) throws IOException {
+		File image = cropImage(element.getLocation(), element.getSize(), fileToImage(capturePage()));
 		return FileUtils.readFileToByteArray(image);
 	}
 
@@ -54,8 +52,7 @@ public class Shooter {
 		try {
 			tempImg = File.createTempFile("screenshot", ".png");
 		} catch (IOException e) {
-			CustomLogger
-					.logError(String.format("cropImage: {%s}", e.getMessage()));
+			CustomLogger.logError(String.format("cropImage: {%s}", e.getMessage()));
 		}
 
 		if (width < 1) {
@@ -65,14 +62,12 @@ public class Shooter {
 			height = 1;
 		}
 
-		BufferedImage croppedImage = image.getSubimage(start.getX(),
-				start.getY(), width, height);
+		BufferedImage croppedImage = image.getSubimage(start.getX(), start.getY(), width, height);
 
 		try {
 			ImageIO.write(croppedImage, "png", tempImg);
 		} catch (IOException e) {
-			CustomLogger
-					.logError(String.format("cropImage: {%s}", e.getMessage()));
+			CustomLogger.logError(String.format("cropImage: {%s}", e.getMessage()));
 		}
 		return tempImg;
 	}
@@ -84,11 +79,9 @@ public class Shooter {
 	private void saveScreenshot(File srcFile, String desPath) {
 		try {
 			FileUtils.moveFile(srcFile, new File(desPath));
-			CustomLogger.logInfo(String.format(
-					"saveScreenshot: screenshot saved at {%s}", desPath));
+			CustomLogger.logInfo(String.format("saveScreenshot: screenshot saved at {%s}", desPath));
 		} catch (IOException e) {
-			CustomLogger.logError(
-					String.format("saveScreenshot: {%s}", e.getMessage()));
+			CustomLogger.logError(String.format("saveScreenshot: {%s}", e.getMessage()));
 		}
 	}
 
@@ -97,8 +90,7 @@ public class Shooter {
 		try {
 			image = ImageIO.read(file);
 		} catch (IOException e) {
-			CustomLogger.logError(
-					String.format("fileToImage: {%s}", e.getMessage()));
+			CustomLogger.logError(String.format("fileToImage: {%s}", e.getMessage()));
 		}
 		return image;
 	}
