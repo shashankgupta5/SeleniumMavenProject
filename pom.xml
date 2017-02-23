@@ -4,7 +4,7 @@
 
 	<groupId>com</groupId>
 	<artifactId>SeleniumMavenProject</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>SeleniumMavenProject</name>
@@ -13,7 +13,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<testSuite>${basedir}/src/test/java/com/SeleniumMavenProject/TestSuite/testSuite.xml</testSuite>
-		<aspectj.version>1.8.9</aspectj.version>
+		<aspectj.version>1.8.10</aspectj.version>
 	</properties>
 
 	<dependencies>
@@ -38,14 +38,9 @@
 			<version>1.2.17</version>
 		</dependency>
 		<dependency>
-			<groupId>com.pojosontheweb</groupId>
-			<artifactId>monte-repack</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
 			<groupId>ru.yandex.qatools.allure</groupId>
 			<artifactId>allure-testng-adaptor</artifactId>
-			<version>1.5.0.RC2</version>
+			<version>1.5.2</version>
 			<exclusions>
 				<exclusion>
 					<groupId>junit</groupId>
