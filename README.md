@@ -32,7 +32,8 @@ Added support for running test in distributed environment using selenium grid. F
 Steps before executing tests-
 
 1. Go to src/resources/Grid
-2. Modify the node.json file as per requirement
-3. Launch run_grid.bat for running server
-4. From now on testSuite.xml will be controlling test execution for browsers
-5. Finally, run test via testSuite.xml or mvn command
+2. Download selenium-server-standalone.jar and place it under src/resources/Grid/
+3. Modify the node.json file as per requirement
+4. Launch run_grid.bat for running server
+5. From now on testSuite.xml will be controlling test execution for browsers
+6. Finally, run test via testSuite.xml or mvn command
