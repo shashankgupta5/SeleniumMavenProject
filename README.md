@@ -2,7 +2,7 @@
 
 ##Description
 
-Wedriver framework implemented using Java, Maven and TestNG. Object oriented architecture framework made with page factory design pattern.
+Wedriver framework implemented using Java, Maven and TestNG. Object oriented architecture framework made with page factory design pattern and running tests via selenium grid.
 
 ##Test Application
 
@@ -32,8 +32,7 @@ Added support for running test in distributed environment using selenium grid. F
 Steps before executing tests-
 
 1. Go to src/resources/Grid
-2. Download selenium-server-standalone.jar and place it under src/resources/Grid/
-3. Modify the node.json file as per requirement
-4. Launch run_grid.bat for running server
-5. From now on testSuite.xml will be controlling test execution for browsers
-6. Finally, run test via testSuite.xml or mvn command
+2. Modify the node.json file as per requirement
+3. Launch run_grid.bat for running server
+4. From now on testSuite.xml will be controlling test execution for browsers i.e., for running tests make a entry with browser-name and platform. Refer testSuite.xml for more info 
+5. Finally, run test via testSuite.xml or mvn command
