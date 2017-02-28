@@ -48,7 +48,6 @@ public class TestRunner {
 
 	@AfterTest(alwaysRun = true)
 	public void afterTest() throws Exception {
-
 		stopBrowser();
 	}
 

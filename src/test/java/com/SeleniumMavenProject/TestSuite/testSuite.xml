@@ -2,11 +2,14 @@
 <suite name="Selenium_Test_Suite" configfailurepolicy="continue"
 	parallel="tests">
 
+	<!-- For browser specify browser value like firefox, chrome, safari, ie 
+		and edge -->
+	<!-- For platform specify platform value like windows, linux, mac etc -->
+
 	<!--Tests executed on IE browser -->
-	<!-- For platform other then windows add 'MAC', 'LINUX', etc. -->
 	<test name="First_Tests" preserve-order="true" group-by-instances="true">
-		<parameter name="browser" value="internet explorer" />
-		<parameter name="platform" value="WINDOWS" />
+		<parameter name="browser" value="ie" />
+		<parameter name="platform" value="windows" />
 
 		<classes>
 			<class name="com.SeleniumMavenProject.Tests.ToolsQATests" />
@@ -15,9 +18,9 @@
 
 	<!--Tests executed on Chrome browser -->
 	<test name="Second_Tests" preserve-order="true"
-	group-by-instances="true">
+		group-by-instances="true">
 		<parameter name="browser" value="chrome" />
-		<parameter name="platform" value="WINDOWS" />
+		<parameter name="platform" value="windows" />
 
 		<classes>
 			<class name="com.SeleniumMavenProject.Tests.ToolsQATests" />
@@ -27,7 +30,7 @@
 	<!-- Tests executed on Firefox browser -->
 	<test name="Third_Tests" preserve-order="true" group-by-instances="true">
 		<parameter name="browser" value="firefox" />
-		<parameter name="platform" value="WINDOWS" />
+		<parameter name="platform" value="windows" />
 
 		<classes>
 			<class name="com.SeleniumMavenProject.Tests.ToolsQATests" />

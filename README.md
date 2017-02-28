@@ -25,9 +25,11 @@ For every test there should be a corresponding PageObject class under com\Seleni
 5. Run logs created under ./results/logs/TestLog.txt
 6. Allure reports created at default path ./target/site/allure-maven-plugin/index.html
 
-## What's New
+##What's New
 
-Added support for running test in distributed environment using selenium grid. For more information visit http://www.seleniumhq.org/docs/07_selenium_grid.jsp. Removed logic for creating test execution videos as it would not be useful in distributed environment.
+Added support for running test in distributed environment using selenium grid (creating a hub followed by attaching nodes to it). For more information visit http://www.seleniumhq.org/docs/07_selenium_grid.jsp. Removed logic for creating test execution videos as it would not be useful in distributed environment.
+
+Added a switch in default_config.properties file to toggle remote or local test execution. If value is set to true then test will be executed using selenium grid server, else locally if set to false. 
 
 Steps before executing tests-
 

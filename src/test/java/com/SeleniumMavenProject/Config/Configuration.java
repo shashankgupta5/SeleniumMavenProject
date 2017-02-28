@@ -69,6 +69,10 @@ public class Configuration {
 		return Integer.parseInt(getProp("IMPLICIT_WAIT_TIMEOUT"));
 	}
 
+	static boolean useRemoteWebDriver() {
+		return Boolean.parseBoolean(getProp("IS_REMOTE_ENVIRONMENT"));
+	}
+
 	public static void endConfigFile() {
 		if (inputStream != null) {
 			inputStream = null;

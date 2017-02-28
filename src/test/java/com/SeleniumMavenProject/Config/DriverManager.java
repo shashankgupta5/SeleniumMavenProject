@@ -3,7 +3,7 @@ package com.SeleniumMavenProject.Config;
 import org.openqa.selenium.WebDriver;
 
 public class DriverManager {
-	private static ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
+	private static ThreadLocal<WebDriver> webDriver = new ThreadLocal<WebDriver>();
 
 	public static WebDriver getWebDriver() {
 		return webDriver.get();
