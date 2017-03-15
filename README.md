@@ -1,14 +1,14 @@
 # SeleniumMavenProject
 
-##Description
+## Description
 
 Wedriver framework implemented using Java, Maven and TestNG. Object oriented architecture framework made with page factory design pattern and running tests via selenium grid.
 
-##Test Application
+## Test Application
 
 Application Under Test is toolsQA (http://toolsqa.com/).
 
-##Project Structure
+## Project Structure
 
 The project follows the standard Maven structure, all test related configuration are read from default_config.properties placed under root directory. All modification goes there.
 
@@ -16,7 +16,7 @@ All tests go in the src\test\java folder. Tests should be placed under com\Selen
 
 For every test there should be a corresponding PageObject class under com\SeleniumMavenProject\Pages package, hence each page is an object. These objects are instantiated under corresponding tests, making tests and UiObjects reside under different packages.
 
-##Geting Started
+## Geting Started
 
 1. Clone repository
 2. Copy driver exe from ./src/resources/Driver/ to C:/Windows
@@ -25,7 +25,7 @@ For every test there should be a corresponding PageObject class under com\Seleni
 5. Run logs created under ./results/logs/TestLog.txt
 6. Allure reports created at default path ./target/site/allure-maven-plugin/index.html
 
-##What's New
+## What's New
 
 Added support for running test in distributed environment using selenium grid (creating a hub followed by attaching nodes to it). For more information visit http://www.seleniumhq.org/docs/07_selenium_grid.jsp. Removed logic for creating test execution videos as it would not be useful in distributed environment.
 
