@@ -1,1 +1,1 @@
-java -jar selenium-server-standalone-3.0.1.jar -role hub -hubConfig hub.json
+java -jar selenium-server-standalone-3.3.1.jar -role hub -hubConfig hub.json -log logs\hub.log
