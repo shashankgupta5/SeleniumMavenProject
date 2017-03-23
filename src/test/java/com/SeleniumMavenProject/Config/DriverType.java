@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -31,12 +30,7 @@ public enum DriverType implements DriverSetup {
 	},
 	IE("internet explorer") {
 		public DesiredCapabilities getDesiredCapabilities() {
-			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-			capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
-			capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-			capabilities.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, true);
-			capabilities.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
-			return capabilities;
+			return DesiredCapabilities.internetExplorer();
 		}
 
 		public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {

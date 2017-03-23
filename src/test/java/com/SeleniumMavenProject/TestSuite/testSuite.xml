@@ -6,16 +6,6 @@
 		and edge -->
 	<!-- For platform specify platform value like windows, linux, mac etc -->
 
-	<!--Tests executed on IE browser -->
-	<test name="First_Tests" preserve-order="true" group-by-instances="true">
-		<parameter name="browser" value="ie" />
-		<parameter name="platform" value="windows" />
-
-		<classes>
-			<class name="com.SeleniumMavenProject.Tests.ToolsQATests" />
-		</classes>
-	</test>
-
 	<!--Tests executed on Chrome browser -->
 	<test name="Second_Tests" preserve-order="true"
 		group-by-instances="true">
@@ -31,7 +21,6 @@
 	<test name="Third_Tests" preserve-order="true" group-by-instances="true">
 		<parameter name="browser" value="firefox" />
 		<parameter name="platform" value="windows" />
-
 		<classes>
 			<class name="com.SeleniumMavenProject.Tests.ToolsQATests" />
 		</classes>
