@@ -27,7 +27,9 @@ For every test there should be a corresponding PageObject class under com\Seleni
 
 ## What's New
 
-Added support for running test in distributed environment using selenium grid (creating a hub followed by attaching nodes to it). For more information visit http://www.seleniumhq.org/docs/07_selenium_grid.jsp. Removed logic for creating test execution videos as it would not be useful in distributed environment.
+v0.3-Added support for running tests on PhantomJS (a headless browser with scriptable WebKit in JavaScript) where WebDriver protocol is implemented using GhostDriver.
+
+v0.2-Added support for running test in distributed environment using selenium grid (creating a hub followed by attaching nodes to it). For more information visit http://www.seleniumhq.org/docs/07_selenium_grid.jsp. Removed logic for creating test execution videos as it would not be useful in distributed environment.
 
 Added a switch in default_config.properties file to toggle remote or local test execution. If value is set to true then test will be executed using selenium grid server, else locally if set to false. 
 
