@@ -5,12 +5,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 
 public enum DriverType implements DriverSetup {
 
-	FIREFOX("firefox") {
+	FIREFOX() {
 		public DesiredCapabilities getDesiredCapabilities() {
 			return DesiredCapabilities.firefox();
 		}
@@ -19,7 +20,7 @@ public enum DriverType implements DriverSetup {
 			return new FirefoxDriver(capabilities);
 		}
 	},
-	CHROME("chrome") {
+	CHROME() {
 		public DesiredCapabilities getDesiredCapabilities() {
 			return DesiredCapabilities.chrome();
 		}
@@ -28,7 +29,7 @@ public enum DriverType implements DriverSetup {
 			return new ChromeDriver(capabilities);
 		}
 	},
-	IE("internet explorer") {
+	IE() {
 		public DesiredCapabilities getDesiredCapabilities() {
 			return DesiredCapabilities.internetExplorer();
 		}
@@ -37,7 +38,7 @@ public enum DriverType implements DriverSetup {
 			return new InternetExplorerDriver(capabilities);
 		}
 	},
-	EDGE("MicrosoftEdge") {
+	EDGE() {
 		public DesiredCapabilities getDesiredCapabilities() {
 			return DesiredCapabilities.edge();
 		}
@@ -46,7 +47,7 @@ public enum DriverType implements DriverSetup {
 			return new EdgeDriver(capabilities);
 		}
 	},
-	SAFARI("safari") {
+	SAFARI() {
 		public DesiredCapabilities getDesiredCapabilities() {
 			DesiredCapabilities capabilities = DesiredCapabilities.safari();
 			capabilities.setCapability("safari.cleanSession", true);
@@ -56,15 +57,17 @@ public enum DriverType implements DriverSetup {
 		public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {
 			return new SafariDriver(capabilities);
 		}
+	},
+	PHANTOMJS() {
+		public DesiredCapabilities getDesiredCapabilities() {
+			DesiredCapabilities capabilities = DesiredCapabilities.phantomjs();
+			capabilities.setJavascriptEnabled(true);
+			capabilities.setCapability("takesScreenshot", true);
+			return capabilities;
+		}
+
+		public WebDriver getWebDriverObject(DesiredCapabilities desiredCapabilities) {
+			return new PhantomJSDriver(desiredCapabilities);
+		}
 	};
-
-	private String value;
-
-	private DriverType(String value) {
-		this.value = value;
-	}
-
-	public String getBrowerName() {
-		return this.value;
-	}
 }
