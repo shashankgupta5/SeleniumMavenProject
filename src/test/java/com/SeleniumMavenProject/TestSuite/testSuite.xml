@@ -2,14 +2,13 @@
 <suite name="Selenium_Test_Suite" configfailurepolicy="continue"
 	parallel="tests">
 
-	<!-- For browser specify browser value like firefox, chrome, safari, ie 
-		and edge -->
+	<!-- For browser specify browser value like firefox, chrome, safari, ie, 
+		edge and phantomjs -->
 	<!-- For platform specify platform value like windows, linux, mac etc -->
 
-	<!--Tests executed on Chrome browser -->
-	<test name="Second_Tests" preserve-order="true"
-		group-by-instances="true">
-		<parameter name="browser" value="chrome" />
+	<!--Tests executed on Headless browser -->
+	<test name="First_Tests" preserve-order="true" group-by-instances="true">
+		<parameter name="browser" value="phantomjs" />
 		<parameter name="platform" value="windows" />
 
 		<classes>
@@ -18,9 +17,11 @@
 	</test>
 
 	<!-- Tests executed on Firefox browser -->
-	<test name="Third_Tests" preserve-order="true" group-by-instances="true">
+	<test name="Second_Tests" preserve-order="true"
+		group-by-instances="true">
 		<parameter name="browser" value="firefox" />
 		<parameter name="platform" value="windows" />
+
 		<classes>
 			<class name="com.SeleniumMavenProject.Tests.ToolsQATests" />
 		</classes>
