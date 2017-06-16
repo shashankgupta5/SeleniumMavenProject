@@ -1,13 +1,13 @@
 package com.SeleniumMavenProject.Pages;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hamcrest.core.Is;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,7 +33,7 @@ public class ToolsQAPage extends BasePage {
 
 	@Step("Started getting practice table data")
 	public void getPracticeTableData() throws IOException {
-		assertThat(driver.getTitle(), is("Demo Table for practicing Selenium Automation"));
+		assertThat(driver.getTitle(), Is.is("Demo Table for practicing Selenium Automation"));
 
 		StringBuilder builder = new StringBuilder();
 		tableData.forEach((e) -> {
@@ -50,19 +50,19 @@ public class ToolsQAPage extends BasePage {
 
 	@Step("Started performing window switching")
 	public void performWindowSwitching() {
-		assertThat(driver.getTitle(), is("Demo Windows for practicing Selenium Automation"));
+		assertThat(driver.getTitle(), Is.is("Demo Windows for practicing Selenium Automation"));
 		waitAndClick(newWindowBtn);
 		switchToBrowserTab();
-		assertThat("performWindowSwitching: window count to be '2'", getWindowCount(), is(2));
+		assertThat("performWindowSwitching: window count to be '2'", getWindowCount(), Is.is(2));
 		closeCurrentBroserTab();
-		assertThat("performWindowSwitching: window count to be '1'", getWindowCount(), is(1));
+		assertThat("performWindowSwitching: window count to be '1'", getWindowCount(), Is.is(1));
 		switchToBrowserTab();
 
 		waitAndClick(newBrowserTabBtn);
 		switchToBrowserTab();
-		assertThat("performWindowSwitching: window count to be '2'", getWindowCount(), is(2));
+		assertThat("performWindowSwitching: window count to be '2'", getWindowCount(), Is.is(2));
 		closeCurrentBroserTab();
-		assertThat("performWindowSwitching: window count to be '1'", getWindowCount(), is(1));
+		assertThat("performWindowSwitching: window count to be '1'", getWindowCount(), Is.is(1));
 		switchToBrowserTab();
 	}
 }

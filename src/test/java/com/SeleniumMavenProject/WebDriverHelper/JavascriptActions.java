@@ -17,6 +17,10 @@ public class JavascriptActions {
 		this.driver = driver;
 	}
 
+	public void click(WebElement element) {
+		js.executeScript("$(arguments[0])[0].click()", element);
+	}
+
 	public void focus(String cssSelector) {
 		js.executeScript("$('" + cssSelector + "').focus()");
 	}
@@ -56,6 +60,10 @@ public class JavascriptActions {
 				"return ($(window).scrollTop() + 60 < $(arguments[0]).offset().top) && ($(window).scrollTop() "
 						+ "+ $(window).height() > $(arguments[0]).offset().top + $(arguments[0]).height() + 60)",
 				element);
+	}
+
+	public Object execute(String script, WebElement element) {
+		return js.executeScript(script, element);
 	}
 
 	public Object executeScript(String script) {
