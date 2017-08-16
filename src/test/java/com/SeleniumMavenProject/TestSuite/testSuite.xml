@@ -6,24 +6,14 @@
 		edge and phantomjs -->
 	<!-- For platform specify platform value like windows, linux, mac etc -->
 
-	<!--Tests executed on Headless browser -->
+	<!-- Tests executed on Chrome browser -->
 	<test name="First_Tests" preserve-order="true" group-by-instances="true">
-		<parameter name="browser" value="phantomjs" />
+		<parameter name="browser" value="chrome" />
 		<parameter name="platform" value="windows" />
 
 		<classes>
 			<class name="com.SeleniumMavenProject.Tests.ToolsQATests" />
-		</classes>
-	</test>
-
-	<!-- Tests executed on Firefox browser -->
-	<test name="Second_Tests" preserve-order="true"
-		group-by-instances="true">
-		<parameter name="browser" value="firefox" />
-		<parameter name="platform" value="windows" />
-
-		<classes>
-			<class name="com.SeleniumMavenProject.Tests.ToolsQATests" />
+			<class name="com.SeleniumMavenProject.Tests.GoogleTests" />
 		</classes>
 	</test>
 </suite>

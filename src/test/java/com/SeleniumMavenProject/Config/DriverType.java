@@ -2,6 +2,7 @@ package com.SeleniumMavenProject.Config;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -22,7 +23,15 @@ public enum DriverType implements DriverSetup {
 	},
 	CHROME() {
 		public DesiredCapabilities getDesiredCapabilities() {
-			return DesiredCapabilities.chrome();
+			DesiredCapabilities capabilities = new DesiredCapabilities();
+			ChromeOptions chromeOptions = new ChromeOptions();
+
+			chromeOptions.addArguments("chrome.switches", "--disable-extensions");
+			chromeOptions.addArguments("--disable-notifications");
+			chromeOptions.addArguments("disable-infobars");
+			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+
+			return capabilities;
 		}
 
 		public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {

@@ -128,6 +128,22 @@ public class BasePage {
 		element.sendKeys(keys);
 	}
 
+	@Step("Wait And Send Keys Like Human")
+	void waitAndSendKeysLikeHuman(WebElement element, String keys) {
+		wait.forElementVisible(element);
+		element.clear();
+
+		char keysArray[] = keys.toCharArray();
+		for (int i = 0; i < keys.length(); i++) {
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				CustomLogger.logError(e.getMessage());
+			}
+			element.sendKeys(keysArray[i] + "");
+		}
+	}
+
 	@Step("Is String In Title")
 	boolean isStringInTitle(String givenTitle) {
 		String currentTitle = driver.getTitle();
