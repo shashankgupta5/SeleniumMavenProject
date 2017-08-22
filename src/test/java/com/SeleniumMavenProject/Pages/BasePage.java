@@ -34,6 +34,7 @@ public class BasePage {
 
 	public BasePage(WebDriver driver) {
 		this.driver = driver;
+		this.locator = new CustomLocator();
 		this.wait = new Wait(driver);
 		this.shooter = new Shooter(driver);
 		this.jsActions = new JavascriptActions(driver);
