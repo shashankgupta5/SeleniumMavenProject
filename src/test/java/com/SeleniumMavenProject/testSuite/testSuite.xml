@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="Selenium_Test_Suite" configfailurepolicy="continue"
+       parallel="tests" thread-count="2">
+
+    <listeners>
+        <listener class-name="listeners.MethodListener"></listener>
+    </listeners>
+
+    <!-- For browser specify browser value like firefox, chrome, safari, ie,
+        edge and phantomjs -->
+    <!-- For platform specify platform value like windows, linux, mac etc -->
+
+    <!-- Tests executed on Chrome browser -->
+    <test name="First_Tests">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="platform" value="windows"/>
+
+        <classes>
+            <class name="com.SeleniumMavenProject.tests.GoogleTests"/>
+            <class name="com.SeleniumMavenProject.tests.ToolsQATests"/>
+        </classes>
+    </test>
+</suite>

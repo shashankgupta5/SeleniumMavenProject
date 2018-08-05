@@ -26,6 +26,9 @@ For every test there should be a corresponding PageObject class under com\Seleni
 6. Allure reports created at default path ./target/site/allure-maven-plugin/index.html
 
 ## What's New
+v0.4-Added support for lombok, re-working on base page objects. If your IDE gives errors-
+	1. For IntelliJ, install lombok plugin from plugin manager and enable annotation processing under settings.
+	2. For Eclipse, insatall using lombok.jar and add the jar to project build path.
 
 v0.3-Added support for running tests on PhantomJS (a headless browser with scriptable WebKit in JavaScript) where WebDriver protocol is implemented using GhostDriver.
 
