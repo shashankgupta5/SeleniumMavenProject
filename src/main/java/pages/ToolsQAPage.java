@@ -6,7 +6,6 @@ import org.hamcrest.core.Is;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import ru.yandex.qatools.allure.annotations.Step;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,8 +29,7 @@ public class ToolsQAPage extends BasePage {
         super(driver);
     }
 
-    @Step("Started getting practice table data")
-    public void getPracticeTableData() throws IOException {
+    public void getPracticeTableData() {
         assertThat(getDriver().getTitle(), Is.is("Demo Table for practicing Selenium Automation"));
 
         StringBuilder builder = new StringBuilder();
@@ -42,7 +40,6 @@ public class ToolsQAPage extends BasePage {
                 containsString("Total 4 buildings"));
     }
 
-    @Step("Started performing window switching")
     public void performWindowSwitching() {
         assertThat(getDriver().getTitle(), Is.is("Demo Windows for practicing Selenium Automation"));
         waitAndClick(newWindowBtn);

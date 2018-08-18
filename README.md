@@ -23,9 +23,11 @@ For every test there should be a corresponding PageObject class under com\Seleni
 3. Launch command prompt and type 'mvn clean test site' and hit Enter
 4. Test execution starts
 5. Run logs created under ./results/logs/TestLog.txt
-6. Allure reports created at default path ./target/site/allure-maven-plugin/index.html
+6. Run command mvn allure:report to generate the allure reports at ./target/site/allure-maven-plugin/index.html
 
 ## What's New
+v0.5-Updates in allure reporting, selenium and lombok.
+
 v0.4-Added support for lombok, re-working on base page objects. If your IDE gives errors-
 	1. For IntelliJ, install lombok plugin from plugin manager and enable annotation processing under settings.
 	2. For Eclipse, insatall using lombok.jar and add the jar to project build path.
