@@ -35,6 +35,18 @@ public enum DriverType implements DriverSetup {
             return new ChromeDriver((ChromeOptions) capabilities);
         }
     },
+    CHROME_HEADLESS() {
+        public MutableCapabilities getCapabilities() {
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.addArguments("--disable-extensions", "--disable-notifications", "disable-infobars");
+            chromeOptions.setHeadless(true);
+            return chromeOptions;
+        }
+
+        public WebDriver getWebDriverObject(MutableCapabilities capabilities) {
+            return new ChromeDriver((ChromeOptions) capabilities);
+        }
+    },
     IE() {
         public MutableCapabilities getCapabilities() {
             return new InternetExplorerOptions();

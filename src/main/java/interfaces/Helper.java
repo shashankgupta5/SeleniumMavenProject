@@ -17,6 +17,7 @@ public interface Helper {
     }.getClass().getEnclosingClass());
 
     WebDriver getDriver();
+
     void setDriver(WebDriver driverToSet);
 
     //=====
@@ -277,8 +278,8 @@ public interface Helper {
         return Wait.waitForElementToBeVisible(getDriver(), element);
     }
 
-    default void waitForElementToBeHidden(String xpath) {
-        Wait.waitForElementToBeHidden(getDriver(), getElementByXpath(xpath));
+    default void waitForElementToBeHidden(By locator) {
+        Wait.waitForElementToBeHidden(getDriver(), locator);
     }
 
     default void waitForElementToBeHidden(WebElement element) {

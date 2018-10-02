@@ -27,6 +27,25 @@ public class Wait {
         return getWait(driver).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameLocator));
     }
 
+    public static void waitForElementToBeHidden(WebDriver driver, By locator) {
+        getWait(driver).until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try {
+                    return !driver.findElement(locator).isDisplayed();
+                } catch (WebDriverException e) {
+                    return true;
+                }
+            }
+
+            @Override
+            public String toString() {
+                return "invisibility of webElement located by " + locator;
+            }
+        });
+    }
+
+
     public static void waitForElementToBeHidden(WebDriver driver, WebElement element) {
         getWait(driver).until(new ExpectedCondition<Boolean>() {
             @Override
@@ -40,7 +59,7 @@ public class Wait {
 
             @Override
             public String toString() {
-                return "waitForElementToBeHidden: invisibility of " + element;
+                return "invisibility of webElement " + element;
             }
         });
     }
@@ -54,7 +73,7 @@ public class Wait {
 
             @Override
             public String toString() {
-                return String.format("waitForNumberOfElementsToBe: number to be \"%s\". Current number: \"%s\"", number,
+                return String.format("number to be \"%s\". Current number: \"%s\"", number,
                         elements.size());
             }
         });
@@ -73,7 +92,7 @@ public class Wait {
 
             @Override
             public String toString() {
-                return String.format("waitForElementTextToBe: '%s' to be present in element %s", text, element);
+                return String.format("'%s' to be present in element %s", text, element);
             }
         });
     }
