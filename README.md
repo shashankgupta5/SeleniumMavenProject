@@ -27,6 +27,8 @@ For every test there should be a corresponding PageObject class under com\Seleni
 
 ## What's New
 
+v0.6-Further dependencies updates. Initial prototype for fluent tests, following the key concept of act and assert.
+
 v0.5-Updates in allure reporting, selenium and lombok.
 
 v0.4-Added support for lombok, re-worked on base page objects. If your IDE gives errors, do the following-
