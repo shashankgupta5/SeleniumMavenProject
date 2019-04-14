@@ -4,10 +4,6 @@
 
 Wedriver framework implemented using Java, Maven and TestNG. Object oriented architecture framework made with page factory design pattern and running tests via selenium grid.
 
-## Test Application
-
-Application Under Test is toolsQA (http://toolsqa.com/).
-
 ## Project Structure
 
 The project follows the standard Maven structure, all test related configuration are read from default_config.properties placed under root directory. All modification goes there.
