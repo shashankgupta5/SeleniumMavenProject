@@ -9,8 +9,12 @@ public class RediffMoneyTests extends TestRunner {
     public void testMethod_01_printTable() throws Exception {
         try {
             RediffMoneyPage rediffMoney = new RediffMoneyPage(getWebDriver());
-            rediffMoney.navigateToUrl("https://money.rediff.com/gainers/bsc/daily/groupa");
-            rediffMoney.handleTable();
+
+            rediffMoney
+                    .navigateToPage()
+                    .handleTable()
+                    .verify();
+
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

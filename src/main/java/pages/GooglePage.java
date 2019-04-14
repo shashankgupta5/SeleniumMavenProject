@@ -2,33 +2,42 @@ package pages;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.hamcrest.core.Is;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.testng.Assert;
 
 @Slf4j
-public class GooglePage extends BasePage {
-
-    @FindBy(id = "lst-ib")
-    private WebElement searchBox;
-
-    @FindBy(id = "resultStats")
-    private WebElement status;
+public class GooglePage extends AbstractPage {
 
     public GooglePage(WebDriver driver) {
         super(driver);
     }
 
-    public void searchSomething(String text) {
-        waitAndSendKeysLikeHuman(searchBox, text);
+    @Override
+    public GooglePage navigateToPage() {
+        navigateToUrl("https://www.google.co.in/");
+        return this;
+    }
+
+    public GooglePage searchSomething(String text) {
+        waitAndSendKeysLikeHuman(getPathToSearchBar(), text);
         getActionBuilder().sendKeys(Keys.ENTER).perform();
-        waitForElementToBeVisible(status);
-        String statusText = status.getText();
+        return this;
+    }
+
+    @Override
+    public void verify() {
+        String statusText = waitAndGetText(getPathToResultStatus());
         logger.info(statusText);
-        assertThat("searchSomething: serach text to be not blank", true, Is.is(StringUtils.isNotBlank(statusText)));
+
+        Assert.assertTrue(StringUtils.isNotBlank(statusText), "Search text to be not blank");
+    }
+
+    private String getPathToSearchBar() {
+        return "//*[@name='q']";
+    }
+
+    private String getPathToResultStatus() {
+        return "//*[@id='resultStats']";
     }
 }

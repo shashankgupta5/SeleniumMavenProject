@@ -1,24 +1,18 @@
 package config;
 
+import common.Constants;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertyReader {
-    private static Properties properties;
+    private static Properties properties = new Properties();
 
     static {
-        try {
-            String DEFAULT_CONFIG_FILE = System.getProperty("user.dir") + File.separator
-                    + "default_config.properties";
-            properties = new Properties();
-
-            InputStream inputStream = new FileInputStream(DEFAULT_CONFIG_FILE);
+        try (InputStream inputStream = new FileInputStream(Constants.PATH_TO_CONFIG_FILE)) {
             properties.load(inputStream);
-            inputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

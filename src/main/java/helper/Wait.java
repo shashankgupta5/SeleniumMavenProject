@@ -98,7 +98,7 @@ public class Wait {
     }
 
     public static void waitUntilPageLoaded(WebDriver driver) {
-        Wait.waitForJSEventToBeTrue(driver, "return (document.readyState != 'loading')");
+        Wait.waitForJSEventToBeTrue(driver, "return document.readyState === 'complete'");
     }
 
     public static boolean waitForJSEventToBeTrue(WebDriver driver, String javascript) {

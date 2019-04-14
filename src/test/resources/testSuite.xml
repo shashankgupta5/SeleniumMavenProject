@@ -6,7 +6,7 @@
         <listener class-name="listeners.MethodListener"></listener>
     </listeners>
 
-    <!-- For browser specify browser value like firefox, chrome, chrome_headless, safari, ie and edge -->
+    <!-- For browser specify browser value like firefox, chrome, chrome_headless, ie and edge -->
     <!-- For platform specify platform value like windows, linux, mac etc -->
 
     <!-- Tests executed on Chrome browser -->
@@ -15,7 +15,7 @@
         <parameter name="platform" value="windows"/>
 
         <classes>
-            <class name="tests.ToolsQATests"/>
+            <class name="tests.GoogleTests"/>
         </classes>
     </test>
 </suite>

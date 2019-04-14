@@ -12,8 +12,12 @@ public class GoogleTests extends TestRunner {
     public void testMethod_01_searchSomething() throws Exception {
         try {
             GooglePage googlePage = new GooglePage(getWebDriver());
-            googlePage.navigateToUrl("https://www.google.co.in/");
-            googlePage.searchSomething("cheese");
+
+            googlePage
+                    .navigateToPage()
+                    .searchSomething("Cheese")
+                    .verify();
+
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

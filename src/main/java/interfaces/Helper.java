@@ -135,6 +135,11 @@ public interface Helper {
         clickWithJavascript(element);
     }
 
+    default void clickWithJavascriptWithSelector(String cssSelector) {
+        executeJavascript("document.querySelector(arguments[0]).click();", cssSelector);
+        logger.debug("clicked {} with Javascript", cssSelector);
+    }
+
     default void clickWithJavascript(WebElement element) {
         executeJavascript("arguments[0].click();", element);
         logger.debug("clicked {} with Javascript", element.toString());
@@ -149,13 +154,11 @@ public interface Helper {
     }
 
     default WebElement getElementBy(By byLocator) {
-        WebElement element = getDriver().findElement(byLocator);
-        return element;
+        return getDriver().findElement(byLocator);
     }
 
     default List<WebElement> getElementsByXpath(String xpath) {
-        List<WebElement> elements = getDriver().findElements(By.xpath(xpath));
-        return elements;
+        return getDriver().findElements(By.xpath(xpath));
     }
 
     default WebElement getElementByText(String text) {
@@ -290,35 +293,33 @@ public interface Helper {
         return Wait.waitForElementTextToBe(getDriver(), element, text);
     }
 
-    default void waitAndClickWithJavascript(WebElement element) {
-        waitForElementToBeVisible(element);
+    default void waitAndClickWithJavascript(String xpath) {
+        WebElement element = waitForElementToBeVisible(xpath);
         clickWithJavascript(element);
     }
 
-    default void waitAndClick(WebElement element) {
-        waitForElementToBeVisible(element);
+    default void waitAndClick(String xpath) {
+        WebElement element = waitForElementToBeVisible(xpath);
         clickElement(element);
     }
 
-    default void waitAndSendKeys(WebElement element, String keys) {
-        waitForElementToBeVisible(element);
+    default void waitAndSendKeys(String xpath, String keys) {
+        WebElement element = waitForElementToBeVisible(xpath);
         element.clear();
         element.sendKeys(keys);
     }
 
-    default void waitAndSendKeysLikeHuman(WebElement element, String keys) {
-        waitForElementToBeVisible(element);
+    default void waitAndSendKeysLikeHuman(String xpath, String keys) {
+        WebElement element = waitForElementToBeVisible(xpath);
         element.clear();
+        keys.chars().mapToObj(c -> (char) c).forEach(each -> {
+            waitFor(50);
+            element.sendKeys(String.valueOf(each));
+        });
+    }
 
-        char keysArray[] = keys.toCharArray();
-        for (int i = 0; i < keys.length(); i++) {
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                logger.error(e.getMessage());
-            }
-            element.sendKeys(keysArray[i] + "");
-        }
+    default String waitAndGetText(String xpath) {
+        return waitForElementToBeVisible(xpath).getText();
     }
 
     default void waitUntilPageLoaded() {
