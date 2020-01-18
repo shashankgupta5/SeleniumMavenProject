@@ -15,13 +15,13 @@ For every test there should be a corresponding PageObject class under com\Seleni
 ## Geting Started
 
 1. Clone repository
-2. Copy driver exe from ./src/resources/Driver/ to C:/Windows
-3. Launch command prompt and type 'mvn clean test site' and hit Enter
-4. Test execution starts
-5. Run logs created under ./results/logs/TestLog.txt
-6. Run command mvn allure:report to generate the allure reports at ./target/site/allure-maven-plugin/index.html
+2. Launch command prompt and type 'mvn clean test site' and hit Enter
+3. Test execution starts
+4. Run logs created under ./results/logs/TestLog.txt
+5. Run command mvn allure:report to generate the allure reports at ./target/site/allure-maven-plugin/index.html
 
 ## What's New
+v0.7-Deprecated support for IE and Edge Browser, support for Mac OS and dependency updates. Support for (*)NIX is not yet implemented. 
 
 v0.6-Further dependencies updates. Initial prototype for fluent tests, following the key concept of act and assert.
 
@@ -29,7 +29,7 @@ v0.5-Updates in allure reporting, selenium and lombok.
 
 v0.4-Added support for lombok, re-worked on base page objects. If your IDE gives errors, do the following-
 1. For IntelliJ, install lombok plugin from plugin manager and enable annotation processing under settings.
-2. For Eclipse, insatall using lombok.jar and add the jar to project build path.
+2. For Eclipse, install using lombok.jar and add the jar to project build path.
 
 v0.3-Added support for running tests on PhantomJS (a headless browser with scriptable WebKit in JavaScript) where WebDriver protocol is implemented using GhostDriver.
 

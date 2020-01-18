@@ -1,15 +1,14 @@
 package tests;
 
-import common.Retry;
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import pages.GooglePage;
 
-@Test(groups = {"google_tests"}, retryAnalyzer = Retry.class)
+@Test(groups = {"google_tests"})
 public class GoogleTests extends TestRunner {
 
     @Description("Test method to search on google")
-    public void testMethod_01_searchSomething() throws Exception {
+    public void testMethod_01_searchSomething() {
         try {
             GooglePage googlePage = new GooglePage(getWebDriver());
 
@@ -19,7 +18,7 @@ public class GoogleTests extends TestRunner {
                     .verify();
 
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            failTestIfRequired(e.getMessage());
         }
     }
 }

@@ -1,5 +1,8 @@
 package config;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.MutableCapabilities;
@@ -7,10 +10,6 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class DriverFactory {

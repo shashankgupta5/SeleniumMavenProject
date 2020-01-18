@@ -3,16 +3,16 @@
        parallel="tests" thread-count="2">
 
     <listeners>
-        <listener class-name="listeners.MethodListener"></listener>
+        <listener class-name="listeners.MethodListener"/>
     </listeners>
 
-    <!-- For browser specify browser value like firefox, chrome, chrome_headless, ie and edge -->
-    <!-- For platform specify platform value like windows, linux, mac etc -->
+    <!-- For browser specify browser value like firefox, chrome and chrome_headless -->
+    <!-- For platform specify platform value like windows or mac -->
 
     <!-- Tests executed on Chrome browser -->
     <test name="First_Tests">
-        <parameter name="browser" value="chrome"/>
-        <parameter name="platform" value="windows"/>
+        <parameter name="browser" value="firefox"/>
+        <parameter name="platform" value="mac"/>
 
         <classes>
             <class name="tests.GoogleTests"/>

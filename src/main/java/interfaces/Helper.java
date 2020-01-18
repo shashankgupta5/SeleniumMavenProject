@@ -2,14 +2,21 @@ package interfaces;
 
 import config.PropertyReader;
 import helper.Wait;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public interface Helper {

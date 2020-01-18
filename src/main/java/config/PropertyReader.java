@@ -1,11 +1,10 @@
 package config;
 
 import common.Constants;
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
+import org.apache.commons.lang3.StringUtils;
 
 public class PropertyReader {
     private static Properties properties = new Properties();

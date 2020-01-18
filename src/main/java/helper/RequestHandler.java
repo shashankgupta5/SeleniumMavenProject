@@ -1,5 +1,7 @@
 package helper;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -10,9 +12,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 public class RequestHandler {
@@ -35,7 +34,7 @@ public class RequestHandler {
         try {
             CloseableHttpClient client = HttpClients.createDefault();
             HttpPost postRequest = new HttpPost(apiUrl);
-            List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
+            List<BasicNameValuePair> pairs = new ArrayList<>();
 
             for (int i = 0; i < params.length; i++) {
                 pairs.add(new BasicNameValuePair(params[i][0], params[i][1]));

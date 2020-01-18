@@ -6,7 +6,7 @@ import pages.RediffMoneyPage;
 public class RediffMoneyTests extends TestRunner {
 
     @Test
-    public void testMethod_01_printTable() throws Exception {
+    public void testMethod_01_printTable() {
         try {
             RediffMoneyPage rediffMoney = new RediffMoneyPage(getWebDriver());
 
@@ -16,7 +16,7 @@ public class RediffMoneyTests extends TestRunner {
                     .verify();
 
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            failTestIfRequired(e.getMessage());
         }
     }
 }
