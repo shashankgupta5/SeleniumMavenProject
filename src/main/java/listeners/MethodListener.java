@@ -15,8 +15,8 @@ public class MethodListener implements IInvokedMethodListener {
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
         if (method.isTestMethod()) {
-            String browserName = getDefaultsForDriverIfMissing(method, "browser");
-            String platformName = getDefaultsForDriverIfMissing(method, "platform");
+            String browserName = getDefaultBrowserIfMissing(method);
+            String platformName = getDefaultForPlatformIfMissing(method);
             try {
                 DriverManager.setWebDriver(DriverFactory.createWebDriverInstance(browserName, platformName));
             } catch (MalformedURLException e) {
@@ -32,22 +32,21 @@ public class MethodListener implements IInvokedMethodListener {
         }
     }
 
-    private String getDefaultsForDriverIfMissing(IInvokedMethod method, String propertyName) {
-        String value = method.getTestMethod().getXmlTest().getLocalParameters().get(propertyName);
-        if(StringUtils.isNotBlank(value))
+    private String getDefaultBrowserIfMissing(IInvokedMethod method) {
+        String value = method.getTestMethod().getXmlTest().getLocalParameters().get("browser");
+        if (StringUtils.isNotBlank(value))
             return value;
 
-        if(StringUtils.equals(propertyName, "platform")) {
-            if(Constants.getOSName().matches("(.*)mac(.*)"))
-                return "mac";
-            else
-                return "windows";
-        }
+        return "chrome";
+    }
 
-        if(StringUtils.equals(propertyName, "browser")) {
-            return "firefox";
-        }
+    private String getDefaultForPlatformIfMissing(IInvokedMethod method) {
+        String value = method.getTestMethod().getXmlTest().getLocalParameters().get("platform");
+        if (StringUtils.isNotBlank(value))
+            return value;
 
-        return "";
+        return Constants.getOSName().matches("(.*)mac(.*)")
+               ? "mac"
+               : "windows";
     }
 }

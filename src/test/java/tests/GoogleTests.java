@@ -4,7 +4,7 @@ import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import pages.GooglePage;
 
-@Test(groups = {"google_tests"})
+@Test
 public class GoogleTests extends TestRunner {
 
     @Description("Test method to search on google")
