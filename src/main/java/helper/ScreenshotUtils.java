@@ -15,81 +15,82 @@ import org.openqa.selenium.WebElement;
 
 @Slf4j
 public class ScreenshotUtils {
-    private WebDriver driver;
 
-    public ScreenshotUtils(WebDriver driver) {
-        this.driver = driver;
-    }
+	private WebDriver driver;
 
-    public void captureWebPage(String desPath) {
-        saveScreenshot(capturePage(), desPath);
-    }
+	public ScreenshotUtils(WebDriver driver) {
+		this.driver = driver;
+	}
 
-    public void captureWebElement(WebElement element, String desPath) {
-        Point start = element.getLocation();
-        Dimension size = element.getSize();
+	public void captureWebPage(String desPath) {
+		saveScreenshot(capturePage(), desPath);
+	}
 
-        File image = cropImage(start, size, fileToImage(capturePage()));
-        saveScreenshot(image, desPath);
-    }
+	public void captureWebElement(WebElement element, String desPath) {
+		Point start = element.getLocation();
+		Dimension size = element.getSize();
 
-    public byte[] captureWebPageAsByteArray() throws IOException {
-        return FileUtils.readFileToByteArray(capturePage());
-    }
+		File image = cropImage(start, size, fileToImage(capturePage()));
+		saveScreenshot(image, desPath);
+	}
 
-    public byte[] captureWebElementAsByteArray(WebElement element) throws IOException {
-        File image = cropImage(element.getLocation(), element.getSize(), fileToImage(capturePage()));
-        return FileUtils.readFileToByteArray(image);
-    }
+	public byte[] captureWebPageAsByteArray() throws IOException {
+		return FileUtils.readFileToByteArray(capturePage());
+	}
 
-    private File cropImage(Point start, Dimension size, BufferedImage image) {
-        int width = size.getWidth();
-        int height = size.getHeight();
-        File tempImg = null;
+	public byte[] captureWebElementAsByteArray(WebElement element) throws IOException {
+		File image = cropImage(element.getLocation(), element.getSize(), fileToImage(capturePage()));
+		return FileUtils.readFileToByteArray(image);
+	}
 
-        try {
-            tempImg = File.createTempFile("screenshot", ".png");
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
+	private File cropImage(Point start, Dimension size, BufferedImage image) {
+		int width = size.getWidth();
+		int height = size.getHeight();
+		File tempImg = null;
 
-        if (width < 1) {
-            width = 1;
-        }
-        if (height < 1) {
-            height = 1;
-        }
+		try {
+			tempImg = File.createTempFile("screenshot", ".png");
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+		}
 
-        BufferedImage croppedImage = image.getSubimage(start.getX(), start.getY(), width, height);
+		if (width < 1) {
+			width = 1;
+		}
+		if (height < 1) {
+			height = 1;
+		}
 
-        try {
-            ImageIO.write(croppedImage, "png", tempImg);
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
-        return tempImg;
-    }
+		BufferedImage croppedImage = image.getSubimage(start.getX(), start.getY(), width, height);
 
-    private File capturePage() {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-    }
+		try {
+			ImageIO.write(croppedImage, "png", tempImg);
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+		}
+		return tempImg;
+	}
 
-    private void saveScreenshot(File srcFile, String desPath) {
-        try {
-            FileUtils.moveFile(srcFile, new File(desPath));
-            logger.info("saveScreenshot: screenshot saved at {}", desPath);
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
-    }
+	private File capturePage() {
+		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+	}
 
-    private BufferedImage fileToImage(File file) {
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(file);
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
-        return image;
-    }
+	private void saveScreenshot(File srcFile, String desPath) {
+		try {
+			FileUtils.moveFile(srcFile, new File(desPath));
+			logger.info("saveScreenshot: screenshot saved at {}", desPath);
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+		}
+	}
+
+	private BufferedImage fileToImage(File file) {
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(file);
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+		}
+		return image;
+	}
 }

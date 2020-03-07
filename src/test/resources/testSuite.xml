@@ -11,11 +11,11 @@
 
     <!-- Tests executed on Chrome browser -->
     <test name="First_Tests">
-        <parameter name="browser" value="firefox"/>
+        <parameter name="browser" value="chrome"/>
         <parameter name="platform" value="mac"/>
 
         <classes>
-            <class name="tests.GoogleTests"/>
+            <class name="tests.RediffMoneyTests"/>
         </classes>
     </test>
 </suite>

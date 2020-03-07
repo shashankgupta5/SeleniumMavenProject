@@ -7,37 +7,37 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 @Slf4j
-public class GooglePage extends AbstractPage {
+public class GooglePage extends AbstractPage<GooglePage> {
 
-    public GooglePage(WebDriver driver) {
-        super(driver);
-    }
+	public GooglePage(WebDriver driver) {
+		super(driver);
+	}
 
-    @Override
-    public GooglePage navigateToPage() {
-        navigateToUrl("https://www.google.co.in/");
-        return this;
-    }
+	@Override
+	public GooglePage navigateToPage() {
+		navigateToUrl("https://www.google.co.in/");
+		return this;
+	}
 
-    public GooglePage searchSomething(String text) {
-        waitAndSendKeysLikeHuman(getPathToSearchBar(), text);
-        getActionBuilder().sendKeys(Keys.ENTER).perform();
-        return this;
-    }
+	public GooglePage searchSomething(String text) {
+		waitAndSendKeysLikeHuman(getPathToSearchBar(), text);
+		getActionBuilder().sendKeys(Keys.ENTER).perform();
+		return this;
+	}
 
-    @Override
-    public void verify() {
-        String statusText = waitAndGetText(getPathToResultStatus());
-        logger.info(statusText);
+	@Override
+	public void verify() {
+		String statusText = waitAndGetText(getPathToResultStatus());
+		logger.info(statusText);
 
-        Assert.assertTrue(StringUtils.isNotBlank(statusText), "Search text to be not blank");
-    }
+		Assert.assertTrue(StringUtils.isNotBlank(statusText), "Search text to be not blank");
+	}
 
-    private String getPathToSearchBar() {
-        return "//*[@name='q']";
-    }
+	private String getPathToSearchBar() {
+		return "//*[@name='q']";
+	}
 
-    private String getPathToResultStatus() {
-        return "//*[@id='resultStats']";
-    }
+	private String getPathToResultStatus() {
+		return "//div[@id='result-stats']";
+	}
 }
