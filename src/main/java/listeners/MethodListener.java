@@ -49,6 +49,6 @@ public class MethodListener implements IInvokedMethodListener {
 			return "firefox";
 		}
 
-		return "";
+		return "chrome";
 	}
 }
