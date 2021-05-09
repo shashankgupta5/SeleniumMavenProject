@@ -1,6 +1,5 @@
 {
-  "capabilities":
-  [
+  "capabilities": [
     {
       "browserName": "firefox",
       "maxInstances": 5,
@@ -9,11 +8,6 @@
     {
       "browserName": "chrome",
       "maxInstances": 5,
-      "seleniumProtocol": "WebDriver"
-    },
-    {
-      "browserName": "internet explorer",
-      "maxInstances": 1,
       "seleniumProtocol": "WebDriver"
     }
   ],
@@ -29,7 +23,7 @@
   "unregisterIfStillDownAfter": 60000,
   "downPollingLimit": 2,
   "debug": false,
-  "servlets" : [],
+  "servlets": [],
   "withoutServlets": [],
   "custom": {}
 }

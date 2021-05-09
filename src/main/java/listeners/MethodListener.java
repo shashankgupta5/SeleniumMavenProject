@@ -45,10 +45,8 @@ public class MethodListener implements IInvokedMethodListener {
 					: "windows";
 		}
 
-		if (StringUtils.equals(propertyName, "browser")) {
-			return "firefox";
-		}
-
+		// Defaulting browser value to chrome as no browser was passed,
+		// plus criteria to decide on runtime, like OS above
 		return "chrome";
 	}
 }
