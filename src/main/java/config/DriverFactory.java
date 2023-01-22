@@ -2,6 +2,7 @@ package config;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -49,8 +50,7 @@ public class DriverFactory {
     }
 
     private static void configureWebDriver(WebDriver driver) {
-        driver.manage().timeouts().implicitlyWait(PropertyReader.getImplicitWaitTimeOut(), TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(PropertyReader.getImplicitWaitTimeOut(), TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(PropertyReader.getImplicitWaitTimeOut()));
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
     }

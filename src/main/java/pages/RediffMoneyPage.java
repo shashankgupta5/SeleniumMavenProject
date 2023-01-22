@@ -1,43 +1,52 @@
 package pages;
 
 import java.util.List;
-import java.util.function.Consumer;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
-public class RediffMoneyPage extends AbstractPage {
+public class RediffMoneyPage extends AbstractPage<RediffMoneyPage> {
 
-    public RediffMoneyPage(WebDriver driver) {
-        super(driver);
-    }
+	private StringBuilder builder = new StringBuilder();
 
-    @Override
-    public RediffMoneyPage navigateToPage() {
-        navigateToUrl("https://money.rediff.com/gainers/bsc/daily/groupa");
-        return this;
-    }
+	public RediffMoneyPage(WebDriver driver) {
+		super(driver);
+	}
 
-    public RediffMoneyPage handleTable() {
-        WebElement table = getElementByXpath("//table[@class='dataTable']");
-        List<WebElement> columns = table.findElements(By.xpath("thead/tr/th"));
-        List<WebElement> rows = table.findElements(By.xpath("tbody/tr"));
+	@Override
+	public RediffMoneyPage navigateToPage() {
+		navigateToUrl("https://money.rediff.com/gainers/bsc/daily/groupa");
+		return this;
+	}
 
-        Consumer<WebElement> elementTextConsumer = element -> logger.info(element.getText());
-        columns.forEach(elementTextConsumer);
+	public RediffMoneyPage handleTable() {
+		WebElement table = getElementByXpath("//table[@class='dataTable']");
+		List<WebElement> columns = table.findElements(By.xpath("thead/tr/th"));
+		List<WebElement> rows = table.findElements(By.xpath("tbody/tr"));
 
-        for (int i = 0; i < rows.size(); i++) {
-            for (int j = 1; j <= columns.size(); j++) {
-                logger.info(rows.get(i).findElement(By.xpath("td[" + j + "]")).getText() + "\t");
-            }
-            logger.info("\n");
-        }
+		columns.stream()
+				.map(WebElement::getText)
+				.forEach(each -> builder.append(each).append("\t"));
 
-        return this;
-    }
+		builder.append("\n");
 
-    @Override
-    public void verify() {
-        //TODO-Implement verify
-    }
+		for (int i = 0; i < rows.size(); i++) {
+			for (int j = 1; j <= columns.size(); j++) {
+				builder.append(rows.get(i).findElement(By.xpath("td[" + j + "]")).getText()).append("\t");
+			}
+			builder.append("\n");
+		}
+
+		logger.info("\n{}", builder.toString());
+		return this;
+	}
+
+	@Override
+	public void verify() {
+		if (StringUtils.isBlank(builder.toString())) {
+			Assert.fail("No data found in the table, hence failing");
+		}
+	}
 }

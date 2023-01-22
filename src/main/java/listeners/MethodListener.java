@@ -12,41 +12,41 @@ import org.testng.ITestResult;
 
 public class MethodListener implements IInvokedMethodListener {
 
-    @Override
-    public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
-        if (method.isTestMethod()) {
-            String browserName = getDefaultBrowserIfMissing(method);
-            String platformName = getDefaultForPlatformIfMissing(method);
-            try {
-                DriverManager.setWebDriver(DriverFactory.createWebDriverInstance(browserName, platformName));
-            } catch (MalformedURLException e) {
-                Assert.fail(e.getMessage());
-            }
-        }
-    }
+	@Override
+	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
+		if (method.isTestMethod()) {
+			String browserName = getDefaultsForDriverIfMissing(method, "browser");
+			String platformName = getDefaultsForDriverIfMissing(method, "platform");
+			try {
+				DriverManager
+						.setWebDriver(DriverFactory.createWebDriverInstance(browserName, platformName));
+			} catch (MalformedURLException e) {
+				Assert.fail(e.getMessage());
+			}
+		}
+	}
 
-    @Override
-    public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
-        if (method.isTestMethod()) {
-            DriverManager.quitDriver();
-        }
-    }
+	@Override
+	public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
+		if (method.isTestMethod()) {
+			DriverManager.quitDriver();
+		}
+	}
 
-    private String getDefaultBrowserIfMissing(IInvokedMethod method) {
-        String value = method.getTestMethod().getXmlTest().getLocalParameters().get("browser");
-        if (StringUtils.isNotBlank(value))
-            return value;
+	private String getDefaultsForDriverIfMissing(IInvokedMethod method, String propertyName) {
+		String value = method.getTestMethod().getXmlTest().getLocalParameters().get(propertyName);
+		if (StringUtils.isNotBlank(value)) {
+			return value;
+		}
 
-        return "chrome";
-    }
+		if (StringUtils.equals(propertyName, "platform")) {
+			return Constants.getOSName().matches("(.*)mac(.*)")
+					? "mac"
+					: "windows";
+		}
 
-    private String getDefaultForPlatformIfMissing(IInvokedMethod method) {
-        String value = method.getTestMethod().getXmlTest().getLocalParameters().get("platform");
-        if (StringUtils.isNotBlank(value))
-            return value;
-
-        return Constants.getOSName().matches("(.*)mac(.*)")
-               ? "mac"
-               : "windows";
-    }
+		// Defaulting browser value to chrome as no browser was passed,
+		// plus criteria to decide on runtime, like OS above
+		return "chrome";
+	}
 }

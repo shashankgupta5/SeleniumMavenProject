@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 
 public abstract class AbstractPage<T> extends HelperImpl {
 
-    public AbstractPage(WebDriver driver) {
-        setDriver(driver);
-    }
+	public AbstractPage(WebDriver driver) {
+		setDriver(driver);
+	}
 
-    public abstract T navigateToPage();
+	public abstract T navigateToPage();
 
-    public abstract void verify();
+	public abstract void verify();
 }

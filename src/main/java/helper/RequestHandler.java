@@ -16,38 +16,36 @@ import org.apache.http.util.EntityUtils;
 @Slf4j
 public class RequestHandler {
 
-    public String sendGetRequest(String apiUrl) {
-        try {
-            CloseableHttpClient client = HttpClients.createDefault();
-            HttpGet getRequest = new HttpGet(apiUrl);
-            HttpResponse response = client.execute(getRequest);
+	public String sendGetRequest(String apiUrl) {
+		try (CloseableHttpClient client = HttpClients.createDefault()) {
+			HttpGet getRequest = new HttpGet(apiUrl);
+			HttpResponse response = client.execute(getRequest);
 
-            HttpEntity entity = response.getEntity();
-            return EntityUtils.toString(entity);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return null;
-        }
-    }
+			HttpEntity entity = response.getEntity();
+			return EntityUtils.toString(entity);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return null;
+		}
+	}
 
-    public String sendPostRequest(String apiUrl, String[][] params) {
-        try {
-            CloseableHttpClient client = HttpClients.createDefault();
-            HttpPost postRequest = new HttpPost(apiUrl);
-            List<BasicNameValuePair> pairs = new ArrayList<>();
+	public String sendPostRequest(String apiUrl, String[][] params) {
+		try (CloseableHttpClient client = HttpClients.createDefault()) {
+			HttpPost postRequest = new HttpPost(apiUrl);
+			List<BasicNameValuePair> pairs = new ArrayList<>();
 
-            for (int i = 0; i < params.length; i++) {
-                pairs.add(new BasicNameValuePair(params[i][0], params[i][1]));
-            }
+			for (int i = 0; i < params.length; i++) {
+				pairs.add(new BasicNameValuePair(params[i][0], params[i][1]));
+			}
 
-            postRequest.setEntity(new UrlEncodedFormEntity(pairs));
-            HttpResponse response = client.execute(postRequest);
+			postRequest.setEntity(new UrlEncodedFormEntity(pairs));
+			HttpResponse response = client.execute(postRequest);
 
-            HttpEntity entity = response.getEntity();
-            return EntityUtils.toString(entity);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return null;
-        }
-    }
+			HttpEntity entity = response.getEntity();
+			return EntityUtils.toString(entity);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return null;
+		}
+	}
 }

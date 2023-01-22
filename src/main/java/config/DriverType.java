@@ -12,7 +12,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
 
 public enum DriverType implements DriverSetup {
-
     FIREFOX() {
         public Capabilities getCapabilities() {
             return new FirefoxOptions();
