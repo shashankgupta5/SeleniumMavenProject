@@ -1,1 +1,1 @@
-java -jar selenium-server-standalone-3.141.59.jar -role node -nodeConfig node_1.json
+java -jar selenium-server-4.7.2.jar node --port 5555 --hub http://127.0.0.1:4444

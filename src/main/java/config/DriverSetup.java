@@ -1,9 +1,10 @@
 package config;
 
-import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
 public interface DriverSetup {
-    WebDriver getWebDriverObject(MutableCapabilities capabilities);
-    MutableCapabilities getCapabilities();
+    WebDriver getWebDriverObject(Capabilities capabilities);
+
+    Capabilities getCapabilities();
 }

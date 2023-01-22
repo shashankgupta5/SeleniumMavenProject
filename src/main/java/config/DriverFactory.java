@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -27,12 +28,14 @@ public class DriverFactory {
 
     private static WebDriver getWebDriverFromConfiguration(DriverType driverType, String platform) throws MalformedURLException {
         WebDriver driver;
-        MutableCapabilities capabilities = driverType.getCapabilities();
+        Capabilities capabilities = driverType.getCapabilities();
         if (PropertyReader.useRemoteWebDriver()) {
+            DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+            desiredCapabilities.merge(capabilities);
             if (StringUtils.isNotBlank(platform)) {
-                ((DesiredCapabilities) capabilities).setPlatform(Platform.valueOf(platform.toUpperCase()));
+                desiredCapabilities.setPlatform(Platform.valueOf(platform.toUpperCase()));
             }
-            driver = new RemoteWebDriver(new URL(PropertyReader.getGridURL()), capabilities);
+            driver = new RemoteWebDriver(new URL(PropertyReader.getGridURL()), desiredCapabilities);
         } else {
             driver = driverType.getWebDriverObject(capabilities);
         }

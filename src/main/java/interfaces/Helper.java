@@ -2,21 +2,14 @@ package interfaces;
 
 import config.PropertyReader;
 import helper.Wait;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public interface Helper {
@@ -226,8 +219,6 @@ public interface Helper {
         } catch (WebDriverException exception) {
             if (exception instanceof NoSuchElementException) {
                 logger.debug("WebElement {} NOT FOUND", element);
-            } else if (exception instanceof ElementNotVisibleException) {
-                logger.debug("WebElement {} NOT VISIBLE", element);
             }
             return false;
         } finally {
@@ -243,8 +234,6 @@ public interface Helper {
         } catch (WebDriverException exception) {
             if (exception instanceof NoSuchElementException) {
                 logger.debug("WebElement NOT FOUND with selector of {}", xpath);
-            } else if (exception instanceof ElementNotVisibleException) {
-                logger.debug("WebElement NOT VISIBLE with selector of {}", xpath);
             }
             return false;
         } finally {
@@ -277,7 +266,10 @@ public interface Helper {
     //=====
 
     default void waitFor(int milliseconds) {
-        Wait.waitForXMilliseconds(milliseconds);
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException ignored) {
+        }
     }
 
     default WebElement waitForElementToBeVisible(String xpath) {

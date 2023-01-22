@@ -1,6 +1,7 @@
 package config;
 
 import common.Constants;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,37 +14,34 @@ import org.openqa.selenium.firefox.GeckoDriverService;
 public enum DriverType implements DriverSetup {
 
     FIREFOX() {
-        public MutableCapabilities getCapabilities() {
+        public Capabilities getCapabilities() {
             return new FirefoxOptions();
         }
 
-        public WebDriver getWebDriverObject(MutableCapabilities capabilities) {
-            System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, Constants.getPathToGeckoDriverExe());
+        public WebDriver getWebDriverObject(Capabilities capabilities) {
             return new FirefoxDriver((FirefoxOptions) capabilities);
         }
     },
     CHROME() {
-        public MutableCapabilities getCapabilities() {
+        public Capabilities getCapabilities() {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("--disable-extensions", "--disable-notifications", "disable-infobars");
             return chromeOptions;
         }
 
-        public WebDriver getWebDriverObject(MutableCapabilities capabilities) {
-            System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, Constants.getPathToChromeDriverExe());
+        public WebDriver getWebDriverObject(Capabilities capabilities) {
             return new ChromeDriver((ChromeOptions) capabilities);
         }
     },
     CHROME_HEADLESS() {
-        public MutableCapabilities getCapabilities() {
+        public Capabilities getCapabilities() {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("--disable-extensions", "--disable-notifications", "disable-infobars");
             chromeOptions.setHeadless(true);
             return chromeOptions;
         }
 
-        public WebDriver getWebDriverObject(MutableCapabilities capabilities) {
-            System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, Constants.getPathToChromeDriverExe());
+        public WebDriver getWebDriverObject(Capabilities capabilities) {
             return new ChromeDriver((ChromeOptions) capabilities);
         }
     };

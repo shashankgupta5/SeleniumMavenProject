@@ -38,6 +38,6 @@ public class GooglePage extends AbstractPage {
     }
 
     private String getPathToResultStatus() {
-        return "//*[@id='resultStats']";
+        return "//*[@id='result-stats']";
     }
 }

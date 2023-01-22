@@ -21,6 +21,8 @@ For every test there should be a corresponding PageObject class under com\Seleni
 5. Run command mvn allure:report to generate the allure reports at ./target/site/allure-maven-plugin/index.html
 
 ## What's New
+v0.8-Dependency upgrades, selenium support v4 (with grid).
+
 v0.7-Deprecated support for IE and Edge Browser, support for Mac OS and dependency updates. Support for (*)NIX is not yet implemented. 
 
 v0.6-Further dependencies updates. Initial prototype for fluent tests, following the key concept of act and assert.

@@ -11,8 +11,8 @@
 
     <!-- Tests executed on Chrome browser -->
     <test name="First_Tests">
-        <parameter name="browser" value="firefox"/>
-        <parameter name="platform" value="mac"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="platform" value="windows"/>
 
         <classes>
             <class name="tests.GoogleTests"/>

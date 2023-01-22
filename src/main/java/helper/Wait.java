@@ -1,25 +1,18 @@
 package helper;
 
 import config.PropertyReader;
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
 @Slf4j
 public class Wait {
-    private static FluentWait<WebDriver> wait;
 
     public static WebElement waitForElementToBeVisible(WebDriver driver, WebElement element) {
         return getWait(driver).until(ExpectedConditions.visibilityOf(element));
@@ -128,20 +121,10 @@ public class Wait {
         });
     }
 
-    public static void waitForXMilliseconds(int millisecond) {
-        try {
-            Thread.sleep(millisecond);
-        } catch (InterruptedException ignored) {
-        }
-    }
-
-    public static FluentWait<WebDriver> getWait(WebDriver driver) {
-        if (wait == null) {
-            return new FluentWait<>(driver)
-                    .withTimeout(Duration.of(PropertyReader.getExplicitWaitTimeOut(), ChronoUnit.SECONDS))
-                    .pollingEvery(Duration.of(200, ChronoUnit.MILLIS))
-                    .ignoring(NoSuchElementException.class);
-        }
-        return wait;
+    private static FluentWait<WebDriver> getWait(WebDriver driver) {
+        return new FluentWait<>(driver)
+                .withTimeout(Duration.of(PropertyReader.getExplicitWaitTimeOut(), ChronoUnit.SECONDS))
+                .pollingEvery(Duration.of(200, ChronoUnit.MILLIS))
+                .ignoring(NoSuchElementException.class);
     }
 }
